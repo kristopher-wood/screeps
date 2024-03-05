@@ -11,9 +11,14 @@ const roleScout = require('role.scout');
 const roleDrone = require('role.drone'); // the drone claims a room
 const E51N16worker = require('E51N16.worker'); // the worker for the E51N16 room
 const roleMineralHarvester = require('role.mineralHarvester');
+const roleEnergyTransporter = require('role.energyTransporter');
+const roleMinim = require('role.minim');
+const roleE52N16Harvester = require('role.E52N16Harvester');
+const roleE52N15Harvester = require('role.E52N15Harvester');
+const roleE52N15MineralHarvester = require('role.E52N15MineralHarvester');
 
 function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
-  const activeCreeps = _.filter(Game.creeps, (c) => c.memory.role === role && c.room.name === roomName);
+  const activeCreeps = _.filter(Game.creeps, (c) => c.memory.role === role && c.memory.room === roomName);
   if (_.size(activeCreeps) < minCount) {
     Game.spawns[spawnName].spawnCreep(bodyConfig, `${role}_${roomName}_${Game.time}`, { memory: { role: role, room: roomName } });
   }
@@ -22,20 +27,21 @@ function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
 const creep = {
   run: function () {
     roomName = 'E51N15';
-    minCreeps('nurse', 2, [CARRY, CARRY, MOVE], 'HomeSpawn', roomName);
+    minCreeps('minim', 1, [WORK, CARRY, MOVE], 'HomeSpawn', roomName);
+    minCreeps('nurse', 2, [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, MOVE], 'HomeSpawn', roomName);
     minCreeps('picker', 2, rolePicker.bodyTemplate, 'HomeSpawn', roomName);
-    //minCreeps('mineralHarvester', 0, [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK], 'HomeSpawn', roomName);
+    minCreeps('mineralHarvester', 2, [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK], 'HomeSpawn', roomName);
     minCreeps('worker', 4, roleWorker.bodyTemplate, 'HomeSpawn', roomName);
     minCreeps('repairer', 2, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE], 'HomeSpawn', roomName);
-
+    minCreeps('E52N15Harvester', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],'HomeSpawn', roomName);
+    //minCreeps('E52N15MineralHarvester', 1, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],'HomeSpawn', roomName);
+    //minCreeps('drone', 0, [CLAIM, MOVE], 'HomeSpawn', roomName);
     const sources = Game.spawns['HomeSpawn'].room.find(FIND_SOURCES);
 
     // Ensure one harvester per source
     sources.forEach(source => {
       const harvestersForSource = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester' && creep.memory.sourceId === source.id);
-      if (harvestersForSource.length < 1) { // If no harvester for this source
-        //console.log(`source ${source.id}`);
-        //console.log(`harvesters for source ${harvestersForSource.length}`);
+      if (harvestersForSource.length < 1) {
         const newName = 'Harvester' + Game.time;
         Game.spawns['HomeSpawn'].spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE], newName, {
           memory: {
@@ -46,9 +52,9 @@ const creep = {
       }
     });
 
-    // Hauler, 9 carry, 9 move
+    // Hauler per source
     sources.forEach(source => {
-      if (_.filter(Game.creeps, (creep) => creep.memory.role === 'hauler' && creep.memory.sourceId === source.id).length < 2) {
+      if (_.filter(Game.creeps, (creep) => creep.memory.role === 'hauler' && creep.memory.sourceId === source.id).length < 1) {
         const newName = 'Hauler' + Game.time;
         Game.spawns['HomeSpawn'].spawnCreep([
           CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
@@ -63,7 +69,6 @@ const creep = {
       if (creep.memory.role === 'drone') roleDrone.run(creep);
       if (creep.memory.role === 'scout') roleScout.run(creep);
       if (creep.memory.role === 'worker') roleWorker.run(creep);
-      if (creep.memory.role === 'E51N16.worker') E51N16worker.run(creep);
       if (creep.memory.role === 'picker') rolePicker.run(creep);
       if (creep.memory.role === 'mineralHarvester') roleMineralHarvester.run(creep);
       if (creep.memory.role === 'defender') roleDefender.run(creep);
@@ -71,8 +76,12 @@ const creep = {
       if (creep.memory.role === 'harvester') roleHarvester.run(creep);
       if (creep.memory.role === 'remoteHarvester') roleRemoteHarvester.run(creep);
       if (creep.memory.role === 'repairer') roleRepairer.run(creep);
-      if (creep.memory.role === 'defenseRepairer') roleDefenseRepairer.run(creep);
       if (creep.memory.role === 'nurse') roleNurse.run(creep);
+      if (creep.memory.role === 'minim') roleMinim.run(creep);
+      if (creep.memory.role === 'E52N16Harvester') roleE52N16Harvester.run(creep);
+      if (creep.memory.role === 'E52N15Harvester') roleE52N15Harvester.run(creep);
+      if (creep.memory.role === 'E52N15MineralHarvester') roleE52N16Harvester.run(creep);
+      if (creep.memory.role === 'energyTransporter') roleEnergyTransporter.run(creep);
     }
   }
 };

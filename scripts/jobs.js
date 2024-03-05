@@ -13,7 +13,7 @@ const jobs = {
       if (creep.store[RESOURCE_ENERGY] >= 50) {
         const target = creep.pos.findClosestByPath(towers);
         if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(target, {visualizePathStyle: {stroke: '#0af'}});
+          creep.moveTo(target, {visualizePathStyle: {stroke: '#0af'}, ignoreCreeps: true });
         }
       } else {
         // If the creep has less than 50 energy, collect more
@@ -226,7 +226,7 @@ const jobs = {
     if (creep.memory.targetId) {
       const target = Game.getObjectById(creep.memory.targetId);
       if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(target, {visualizePathStyle: {stroke: '#f96'}});
+        creep.moveTo(target, {visualizePathStyle: {stroke: '#f96'}, ignoreCreeps: false});
       }
     }
   },
@@ -253,7 +253,7 @@ const jobs = {
     const targetToRepair = Game.getObjectById(creep.memory.target);
     if (targetToRepair) {
       if (creep.repair(targetToRepair) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(targetToRepair, {visualizePathStyle: {stroke: '#fa0'}});
+        creep.moveTo(targetToRepair, {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false});
       }
       // If target is full, unset target
       if (targetToRepair.hits === targetToRepair.hitsMax) {
@@ -267,7 +267,7 @@ const jobs = {
     const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if (targets.length) {
       if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#fa0'}});
+        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
       }
     }
   },
@@ -342,16 +342,16 @@ const jobs = {
 
     // Attempt to interact with the target based on its type
     if (target instanceof Resource && creep.pickup(target) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}});
+      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
     } else if ((target instanceof Tombstone
         || target instanceof Ruin
         || target instanceof StructureContainer
         || target instanceof StructureStorage)
       && creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}});
+      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
     } else if (target instanceof Source
       && creep.harvest(target) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}});
+      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
     }
   },
   upgrade: function (creep) {
@@ -367,12 +367,12 @@ const jobs = {
 
     if (creep.memory.upgrading) {
       if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#fa0'}});
+        creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
       }
     } else {
       const sources = creep.room.find(FIND_SOURCES);
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#fa0'}});
+        creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
       }
     }
   }

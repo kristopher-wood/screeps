@@ -6,8 +6,8 @@ const roleNurse = {
     const wasNursing = creep.memory.nursing;
 
     // This needs to be reworked so that the nurse keeps nourishing until empty, and then collects until full. It should not collect if it has any energy left.
-
-    if (creep.store[RESOURCE_ENERGY] < 50) {
+    //creep.memory.nursing=true;
+    if (creep.store[RESOURCE_ENERGY] === 0) {
       creep.memory.nursing = false;
     } else {
       creep.memory.nursing = true;

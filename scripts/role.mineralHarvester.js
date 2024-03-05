@@ -17,8 +17,11 @@ var roleMineralHarvester = {
         filter: (s) => s.structureType == STRUCTURE_STORAGE
       });
       if (target) {
-        if (creep.transfer(target, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+        for (const resourceType in creep.store) {
+          if (creep.transfer(target, resourceType) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(target, {visualizePathStyle: {stroke: '#afa'}});
+            break;
+          }
         }
       }
     } else {

@@ -11,16 +11,14 @@ const roleRepairer = require("./role.repairer");
 const roleDefenseRepairer = require("./role.defenseRepairer");
 const roleNurseHauler = require("./role.nurseHauler");
 const roleNurse = require("./role.nurse");
+const roleEnergyTransporter = require("./role.energyTransporter");
+const roleMinim = require("./role.minim");
+const roleE52N16Harvester = require("./role.E52N16Harvester");
 
 function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
   const activeCreeps = _.filter(Game.creeps, (c) => c.memory.role === role && c.room.name === roomName);
   if (_.size(activeCreeps) < minCount) {
-    Game.spawns[spawnName].spawnCreep(bodyConfig, `${role}_${roomName}_${Game.time}`, {
-      memory: {
-        role: role,
-        room: roomName
-      }
-    });
+    Game.spawns[spawnName].spawnCreep(bodyConfig, `${role}_${roomName}_${Game.time}`, { memory: { role: role, room: roomName } });
   }
 }
 
@@ -48,6 +46,7 @@ module.exports = {
         });
       }
     });
+
     // Get dropHarvesters in E51N16
     const dropHarvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'dropHarvester' && creep.room.name === room.name);
 
@@ -55,10 +54,14 @@ module.exports = {
       this.runDropHarvester(creep);
     }
     //minCreeps('nurseHauler', 1, [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], 'Spawn1', room.name);
-    minCreeps('picker', 0, rolePicker.bodyTemplate, 'Spawn1', room.name);
-    minCreeps('worker', 1, roleWorker.bodyTemplate, 'Spawn1', room.name);
-    minCreeps('repairer', 1, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE], 'Spawn1', room.name);
-    minCreeps('nurse', 1, [CARRY,CARRY,MOVE], 'Spawn1', room.name);
+    minCreeps('minim', 1, [WORK,CARRY,MOVE], 'Spawn1', room.name);
+    minCreeps('picker', 1, rolePicker.bodyTemplate, 'Spawn1', room.name);
+    minCreeps('worker', 3, roleWorker.bodyTemplate, 'Spawn1', room.name);
+    //minCreeps('repairer', 0, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE], 'Spawn1', room.name);
+    minCreeps('nurse', 1, [CARRY,MOVE,CARRY,MOVE,CARRY,MOVE], 'Spawn1', room.name);
+    //minCreeps('energyTransporter', 0, [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'Spawn1', room.name);
+    minCreeps('E52N16Harvester', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'Spawn1', room.name);
+    //minCreeps('mineralHarvester', 1, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'Spawn1', room.name);
 
     /** for all creeps if room is E51N16 and role is nurse or hauler, run the nurseHauler.run(creep) function
     for (let name in Game.creeps) {

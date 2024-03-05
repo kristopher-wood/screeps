@@ -2,21 +2,23 @@ const roleDrone = {
   /** @param {Creep} creep **/
   run: function (creep) {
     const targetRoom = 'E52N15';
-    // Check if the creep is in the target room
     if (creep.room.name !== targetRoom) {
-      // Find exit to target room and move to it
+      console.log('Moving to target room');
+      // Attempt to move to the next room
       const exitDir = Game.map.findExit(creep.room, targetRoom);
-      const exit = creep.pos.findClosestByRange(exitDir);
-      creep.moveTo(exit, { visualizePathStyle: { stroke: '#ffffff' } });
+      const exit = creep.pos.findClosestByPath(exitDir);
+      creep.moveTo(exit, {visualizePathStyle: {stroke: '#ffaa00'}});
     } else {
-      // Once in the target room, move towards the controller
-      if (creep.room.controller) {
-        if (creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-          // Move towards the controller if not in range to claim it
-          creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
-        }
+      console.log('In target room');
+      const controller = creep.room.controller;
+      if (creep.reserveController(controller) === ERR_NOT_IN_RANGE) {
+        creep.claimController(controller)
+        creep.moveTo(controller, {visualizePathStyle: {stroke: '#ffffff'}});
       } else {
-        console.log('Error: No controller found in the target room.');
+        // try to claim
+        if (creep.claimController(controller) === ERR_NOT_IN_RANGE) {
+          creep.moveTo(controller, {visualizePathStyle: {stroke: '#ffffff'}});
+        }
       }
     }
   }
