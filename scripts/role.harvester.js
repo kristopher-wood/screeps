@@ -8,7 +8,8 @@ const roleHarvester = {
       // Assign a source to this creep
       for (const source of sources) {
         // Check if this source is already assigned to a harvester
-        if (!_.some(Game.creeps, c => c.memory.role === 'harvester' && c.memory.sourceId === source.id)) {
+        if (!_.some(Game.creeps, c => c.memory.role === 'harvester'
+          && c.memory.sourceId === source.id)) {
           creep.memory.sourceId = source.id;
           break; // Break the loop once a source has been assigned
         }

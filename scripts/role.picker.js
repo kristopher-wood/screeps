@@ -1,5 +1,10 @@
 const jobs = require('jobs');
 
+/**
+ * The Picker role is responsible for cleaning up any resources that have fallen on the ground
+ * before they can decay, and dropping them off in the correct storage receptacle.
+ * @type {{bodyTemplate: *[], defaultMode: string, roleName: string, run: rolePicker.run}}
+ */
 const rolePicker = {
   // Default properties
   roleName: 'resourcePicker',

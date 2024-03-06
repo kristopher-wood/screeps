@@ -1,3 +1,7 @@
+/**
+ * The Hauler role is responsible for carrying energy from drop harvesters to storage or other structures.
+ * @type {{run: roleHauler.run, collectEnergy: roleHauler.collectEnergy, deliverEnergy: roleHauler.deliverEnergy}}
+ */
 const roleHauler = {
   run: function (creep) {
     const wasDelivering = creep.memory.delivering;

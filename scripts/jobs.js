@@ -13,7 +13,7 @@ const jobs = {
       if (creep.store[RESOURCE_ENERGY] >= 50) {
         const target = creep.pos.findClosestByPath(towers);
         if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(target, {visualizePathStyle: {stroke: '#0af'}, ignoreCreeps: true });
+          creep.moveTo(target, { visualizePathStyle: { stroke: '#0af' }, ignoreCreeps: true });
         }
       } else {
         // If the creep has less than 50 energy, collect more
@@ -83,13 +83,13 @@ const jobs = {
 
     // Survey and store room details
     const sources = creep.room.find(FIND_SOURCES).map(source => {
-      return {id: source.id, pos: source.pos};
+      return { id: source.id, pos: source.pos };
     });
     const hostiles = creep.room.find(FIND_HOSTILE_CREEPS).map(hostile => {
-      return {id: hostile.id, type: hostile.owner.username, pos: hostile.pos};
+      return { id: hostile.id, type: hostile.owner.username, pos: hostile.pos };
     });
     const structures = creep.room.find(FIND_STRUCTURES).map(structure => {
-      return {id: structure.id, type: structure.structureType, pos: structure.pos};
+      return { id: structure.id, type: structure.structureType, pos: structure.pos };
     });
 
     // Update Memory.rooms with findings
@@ -126,7 +126,7 @@ const jobs = {
     // Ensure the exit's pheromone data is initialized
     let exitData = Memory.rooms[roomName].exits[exitName];
     if (!exitData) {
-      Memory.rooms[roomName].exits[exitName] = {hostiles: {weight: 0, true: 0, false: 0}};
+      Memory.rooms[roomName].exits[exitName] = { hostiles: { weight: 0, true: 0, false: 0 } };
       exitData = Memory.rooms[roomName].exits[exitName];
     }
 
@@ -215,7 +215,7 @@ const jobs = {
             && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
         }
       }).filter((structure) => {
-        return !_.some(Game.creeps, {memory: {targetId: structure.id}});
+        return !_.some(Game.creeps, { memory: { targetId: structure.id } });
       }).sort((a, b) => {
         return creep.pos.getRangeTo(a) - creep.pos.getRangeTo(b);
       });
@@ -226,14 +226,14 @@ const jobs = {
     if (creep.memory.targetId) {
       const target = Game.getObjectById(creep.memory.targetId);
       if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(target, {visualizePathStyle: {stroke: '#f96'}, ignoreCreeps: false});
+        creep.moveTo(target, { visualizePathStyle: { stroke: '#f96' }, ignoreCreeps: false });
       }
     }
   },
   getRepairTarget: function (creep) {
-    const targets = creep.room.find(FIND_STRUCTURES, {filter: object => object.hits < object.hitsMax});
+    const targets = creep.room.find(FIND_STRUCTURES, { filter: object => object.hits < object.hitsMax });
     const untargetedTargets = targets.filter(target => {
-      return !_.some(Game.creeps, {memory: {target: target.id}});
+      return !_.some(Game.creeps, { memory: { target: target.id } });
     });
 
     if (untargetedTargets.length > 0) {
@@ -253,7 +253,7 @@ const jobs = {
     const targetToRepair = Game.getObjectById(creep.memory.target);
     if (targetToRepair) {
       if (creep.repair(targetToRepair) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(targetToRepair, {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false});
+        creep.moveTo(targetToRepair, { visualizePathStyle: { stroke: '#fa0' }, ignoreCreeps: false });
       }
       // If target is full, unset target
       if (targetToRepair.hits === targetToRepair.hitsMax) {
@@ -267,7 +267,7 @@ const jobs = {
     const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if (targets.length) {
       if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
+        creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#fa0' }, ignoreCreeps: false });
       }
     }
   },
@@ -342,16 +342,16 @@ const jobs = {
 
     // Attempt to interact with the target based on its type
     if (target instanceof Resource && creep.pickup(target) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
+      creep.moveTo(target, { visualizePathStyle: { stroke: '#0fa' }, ignoreCreeps: false });
     } else if ((target instanceof Tombstone
         || target instanceof Ruin
         || target instanceof StructureContainer
         || target instanceof StructureStorage)
       && creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
+      creep.moveTo(target, { visualizePathStyle: { stroke: '#0fa' }, ignoreCreeps: false });
     } else if (target instanceof Source
       && creep.harvest(target) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(target, {visualizePathStyle: {stroke: '#0fa'}, ignoreCreeps: false });
+      creep.moveTo(target, { visualizePathStyle: { stroke: '#0fa' }, ignoreCreeps: false });
     }
   },
   upgrade: function (creep) {
@@ -367,12 +367,12 @@ const jobs = {
 
     if (creep.memory.upgrading) {
       if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
+        creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#fa0' }, ignoreCreeps: false });
       }
     } else {
       const sources = creep.room.find(FIND_SOURCES);
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#fa0'}, ignoreCreeps: false });
+        creep.moveTo(sources[0], { visualizePathStyle: { stroke: '#fa0' }, ignoreCreeps: false });
       }
     }
   }

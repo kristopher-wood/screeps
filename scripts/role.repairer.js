@@ -1,5 +1,9 @@
 const jobs = require('./jobs');
-// role.repairer.js
+
+/**
+ * The Repairer role is responsible for repairing structures in the room.
+ * @type {{run: roleRepairer.run}}
+ */
 const roleRepairer = {
   /** @param {Creep} creep **/
   run: function (creep) {

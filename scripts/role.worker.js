@@ -1,16 +1,5 @@
 const jobs = require('./jobs');
 
-const bodyParts = [
-  {part: 'MOVE', cost: 50}, // provides movement for one non-movement part
-  {part: 'WORK', cost: 100}, // does 2 units of work per tick
-  {part: 'CARRY', cost: 50}, // carries 50 energy units
-  {part: 'ATTACK', cost: 80},
-  {part: 'RANGED_ATTACK', cost: 150},
-  {part: 'HEAL', cost: 250},
-  {part: 'TOUGH', cost: 10},
-  {part: 'CLAIM', cost: 600}
-];
-
 const roleWorker = {
   // The role name helps identify the purpose of this module
   role: 'worker',

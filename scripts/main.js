@@ -3,14 +3,30 @@ const E51N15 = require('E51N15Handler');
 const E51N16 = require('E51N16Handler');
 
 /**
+ * Reference data
+
  const statuses = {
- idle: '💤 idle',
- charging: '⚡ charging',
- building: '🚧 building',
- upgrading: '⬆ upgrading',
- repairing: '🔧 repairing',
- hauling: '🚚 hauling'
+  idle: '💤 idle',
+  charging: '⚡ charging',
+  collect: '🔄 collect',
+  building: '🚧 building',
+  upgrading: '⬆ upgrading',
+  repairing: '🔧 repairing',
+  hauling: '🚚 hauling' // or delivering
+  nursing: '🍼 nurse'
  };
+
+ const bodyParts = [
+ {part: 'MOVE', cost: 50}, // provides movement for one non-movement part
+ {part: 'WORK', cost: 100}, // does 2 units of work per tick
+ {part: 'CARRY', cost: 50}, // carries 50 energy units
+ {part: 'ATTACK', cost: 80},
+ {part: 'RANGED_ATTACK', cost: 150},
+ {part: 'HEAL', cost: 250},
+ {part: 'TOUGH', cost: 10},
+ {part: 'CLAIM', cost: 600}
+ ];
+
  */
 
 /**
@@ -97,7 +113,7 @@ const roomStrategies = {
               if (towers.length > 0) {
                 jobs.refillTowers(creep);
               } else {
-                  jobs.upgrade(creep);
+                jobs.upgrade(creep);
               }
             }
           }
@@ -113,45 +129,6 @@ const roomStrategies = {
   E51N16: function (room) {
     E51N16.handleRoom(room);
   }
-};
-
-const inspectE51N16 = function () {
-  const room = Game.rooms['E51N16'];
-  if (!room) return;
-
-  //console.log(`Room Level: ${room.controller.level}`);
-  //console.log(`Room ${room.name} data: ${JSON.stringify(room)}.`);
-  // Room E51N16 data: {"name":"E51N16","energyAvailable":550,"energyCapacityAvailable":800,"visual":{"roomName":"E51N16"}}.
-
-  const sources = room.find(FIND_SOURCES);
-  //console.log(`Room ${room.name} sources: ${JSON.stringify(sources)}.`);
-  //Room E51N16 sources: [{"room":{"name":"E51N16","energyAvailable":550,"energyCapacityAvailable":800,"visual":{"roomName":"E51N16"}},"pos":{"x":18,"y":43,"roomName":"E51N16"},"id":"5bbcb0109099fc012e63b89b","energy":3000,"energyCapacity":3000}].
-
-  // Structures Inspection
-  const structures = room.find(FIND_STRUCTURES);
-  const summary = structures.reduce((acc, struct) => {
-    const type = struct.structureType;
-    if (!acc[type]) acc[type] = {count: 0, totalHits: 0, totalHitsMax: 0, energy: 0, energyCapacity: 0};
-
-    acc[type].count++;
-    acc[type].totalHits += struct.hits || 0;
-    acc[type].totalHitsMax += struct.hitsMax || 0;
-
-    if (struct.store) {
-      acc[type].energy += struct.store[RESOURCE_ENERGY] || 0;
-      acc[type].energyCapacity += struct.store.getCapacity(RESOURCE_ENERGY) || 0;
-    } else if (struct.energyCapacity) {
-      acc[type].energy += struct.energy || 0;
-      acc[type].energyCapacity += struct.energyCapacity;
-    }
-    return acc;
-  }, {});
-
-  // Log the summary
-  //console.log(`Structures in E51N16:`);
-  //Object.entries(summary).forEach(([type, data]) => {
-  //  console.log(`${type.toUpperCase()}: Count = ${data.count}, Health = ${data.totalHits}/${data.totalHitsMax}, Energy = ${data.energy}/${data.energyCapacity}`);
-  //});
 };
 
 module.exports.loop = function () {
@@ -171,18 +148,4 @@ module.exports.loop = function () {
       }
     }
   }
-
-  inspectE51N16();
-  /**
-   * [10:22:11 PM][shard3]Structures in E51N16:
-   * [10:22:11 PM][shard3]CONSTRUCTEDWALL: Count = 58, Health = 12825538/17400000000, Energy = 0/0
-   * [10:22:11 PM][shard3]ROAD: Count = 20, Health = 118400/120000, Energy = 0/0
-   * [10:22:11 PM][shard3]CONTROLLER: Count = 1, Health = 0/0, Energy = 0/0
-   * [10:22:11 PM][shard3]SPAWN: Count = 1, Health = 5000/5000, Energy = 300/300
-   * [10:22:11 PM][shard3]EXTENSION: Count = 10, Health = 10000/10000, Energy = 250/500
-   * [10:22:11 PM][shard3]TOWER: Count = 1, Health = 3000/3000, Energy = 350/1000
-   */
-
-  // Other global logic can be placed outside the room loop
-  // For example, managing market orders, global alerts, etc.
 };

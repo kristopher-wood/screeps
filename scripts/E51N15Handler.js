@@ -2,20 +2,16 @@ const roleWorker = require('role.worker');
 const roleDefender = require('role.defender');
 const roleHarvester = require('role.harvester');
 const roleRepairer = require('role.repairer');
-const roleDefenseRepairer = require('role.defenseRepairer');
-const roleRemoteHarvester = require('role.remoteHarvester');
 const roleNurse = require('role.nurse');
 const roleHauler = require('role.hauler');
 const rolePicker = require('role.picker');
 const roleScout = require('role.scout');
 const roleDrone = require('role.drone'); // the drone claims a room
-const E51N16worker = require('E51N16.worker'); // the worker for the E51N16 room
-const roleMineralHarvester = require('role.mineralHarvester');
+//const roleMineralHarvester = require('role.mineralHarvester');
 const roleEnergyTransporter = require('role.energyTransporter');
 const roleMinim = require('role.minim');
 const roleE52N16Harvester = require('role.E52N16Harvester');
 const roleE52N15Harvester = require('role.E52N15Harvester');
-const roleE52N15MineralHarvester = require('role.E52N15MineralHarvester');
 
 function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
   const activeCreeps = _.filter(Game.creeps, (c) => c.memory.role === role && c.memory.room === roomName);
@@ -30,7 +26,7 @@ const creep = {
     minCreeps('minim', 1, [WORK, CARRY, MOVE], 'HomeSpawn', roomName);
     minCreeps('nurse', 2, [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, MOVE], 'HomeSpawn', roomName);
     minCreeps('picker', 2, rolePicker.bodyTemplate, 'HomeSpawn', roomName);
-    minCreeps('mineralHarvester', 2, [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK], 'HomeSpawn', roomName);
+    //minCreeps('mineralHarvester', 2, [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK], 'HomeSpawn', roomName);
     minCreeps('worker', 4, roleWorker.bodyTemplate, 'HomeSpawn', roomName);
     minCreeps('repairer', 2, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE], 'HomeSpawn', roomName);
     minCreeps('E52N15Harvester', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],'HomeSpawn', roomName);
@@ -70,11 +66,10 @@ const creep = {
       if (creep.memory.role === 'scout') roleScout.run(creep);
       if (creep.memory.role === 'worker') roleWorker.run(creep);
       if (creep.memory.role === 'picker') rolePicker.run(creep);
-      if (creep.memory.role === 'mineralHarvester') roleMineralHarvester.run(creep);
+      //if (creep.memory.role === 'mineralHarvester') roleMineralHarvester.run(creep);
       if (creep.memory.role === 'defender') roleDefender.run(creep);
       if (creep.memory.role === 'hauler') roleHauler.run(creep);
       if (creep.memory.role === 'harvester') roleHarvester.run(creep);
-      if (creep.memory.role === 'remoteHarvester') roleRemoteHarvester.run(creep);
       if (creep.memory.role === 'repairer') roleRepairer.run(creep);
       if (creep.memory.role === 'nurse') roleNurse.run(creep);
       if (creep.memory.role === 'minim') roleMinim.run(creep);

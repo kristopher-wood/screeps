@@ -1,5 +1,9 @@
 const jobs = require('./jobs');
 
+/**
+ * The Nurse role nourishes larval creeps by filling the extensions and spawns with energy.
+ * @type {{run: roleNurse.run}}
+ */
 const roleNurse = {
   run: function (creep) {
     if (typeof creep.memory.nursing === 'undefined') creep.memory.nursing = false; // Default to not nursing

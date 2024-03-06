@@ -1,3 +1,6 @@
+/**
+ * Placeholder for a ranged defender role, not fully developed but useful in an emergency
+ */
 const roleDefender = {
   run: function (creep) {
     // Define the body composition of the ranged defender
@@ -20,8 +23,8 @@ const roleDefender = {
       console.log('Spawn error: Not enough resources or spawn is busy.');
     }
 
-// Movement and action logic for the defender creep
-// This should be placed in the main loop or appropriate role file
+    // Movement and action logic for the defender creep
+    // This should be placed in the main loop or appropriate role file
     if (creep.memory.role === 'defender' && creep.memory.action === 'defend') {
       if (creep.room.name !== creep.memory.targetRoom) {
         // Move to the target room
@@ -30,7 +33,7 @@ const roleDefender = {
         creep.moveTo(exit, { visualizePathStyle: { stroke: '#ff0000' } });
       } else {
         // Once in the target room, find and attack hostiles
-        var target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (target) {
           if (creep.rangedAttack(target) === ERR_NOT_IN_RANGE) {
             creep.moveTo(target);
