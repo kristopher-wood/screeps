@@ -57,49 +57,39 @@ const roleHauler = {
     }
   },
   deliverEnergy: function (creep) {
-    // Find the NEAREST container with available capacity
-    const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-      filter: (s) => s.structureType === STRUCTURE_CONTAINER && s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-    });
-
-    // Filter by containers first, then towers, then storage
-    const tower = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-      filter: (s) => s.structureType === STRUCTURE_TOWER && s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-    });
-
-    // find storage
-    const storage = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-      filter: (s) => s.structureType === STRUCTURE_STORAGE && s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-    });
-
-    if (container) {
-      if (creep.transfer(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(container, { visualizePathStyle: { stroke: '#0af' } });
+    // Deliver energy
+    const target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+      filter: (structure) => {
+        return (structure.structureType === STRUCTURE_CONTAINER
+            || structure.structureType === STRUCTURE_STORAGE
+            || structure.structureType === STRUCTURE_TOWER)
+          && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
       }
-    } else {
-      if (tower) {
-        if (creep.transfer(tower, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(tower, { visualizePathStyle: { stroke: '#0af' } });
-        }
-      } else {
-        if (storage) {
-          if (creep.transfer(storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(storage, { visualizePathStyle: { stroke: '#0af' } });
+    });
+    if (target) {
+      if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+        // Utilize PathFinder for optimized pathfinding
+        const path = PathFinder.search(creep.pos, target.pos, {
+          // Apply cost matrix for room to avoid obstacles and swampy areas
+          roomCallback: function (roomName) {
+            const room = Game.rooms[roomName];
+            if (!room) return;
+            const costs = new PathFinder.CostMatrix;
+
+            room.find(FIND_STRUCTURES).forEach(function (struct) {
+              if (struct.structureType === STRUCTURE_ROAD) {
+                // Favor roads
+                costs.set(struct.pos.x, struct.pos.y, 1);
+              } else if (struct.structureType !== STRUCTURE_CONTAINER
+                && (struct.structureType !== STRUCTURE_RAMPART || !struct.my)) {
+                // Avoid non-walkable structures
+                costs.set(struct.pos.x, struct.pos.y, 0xff);
+              }
+            });
+            return costs;
           }
-        } else {
-          // If no storage, tower or container is, drop at the nearest spawn or extension that has room
-          const target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: (s) => (s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_EXTENSION) && s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-          });
-          if (target) {
-            if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-              creep.moveTo(target, { visualizePathStyle: { stroke: '#0af' } });
-            }
-          } else {
-            console.log(`${creep.name} can't find a valid drop-off point.`);
-            // Handle case where no valid container is found - could involve waiting or seeking alternative actions
-          }
-        }
+        });
+        creep.moveByPath(path.path);
       }
     }
   }

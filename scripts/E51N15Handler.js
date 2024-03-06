@@ -12,6 +12,7 @@ const roleEnergyTransporter = require('role.energyTransporter');
 const roleMinim = require('role.minim');
 const roleE52N16Harvester = require('role.E52N16Harvester');
 const roleE52N15Harvester = require('role.E52N15Harvester');
+const { E51N16 } = require('./old/rooms');
 
 function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
   const activeCreeps = _.filter(Game.creeps, (c) => c.memory.role === role && c.memory.room === roomName);
@@ -20,7 +21,7 @@ function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
   }
 }
 
-const creep = {
+const E51N15 = {
   run: function () {
     const roomName = 'E51N15';
     minCreeps('minim', 1, [WORK, CARRY, MOVE], 'HomeSpawn', roomName);
@@ -80,4 +81,4 @@ const creep = {
   }
 };
 
-module.exports = creep;
+module.exports = E51N15;

@@ -1,15 +1,12 @@
-Game
-====
+# Game
 
 The main global game object containing all the game play information.
 
-Game.constructionSites object<string, [ConstructionSite](https://docs.screeps.com/api/#ConstructionSite)\>
----------------------------------------------------------------------------------------------------------
+## Game.constructionSites object<string, [ConstructionSite](https://docs.screeps.com/api/#ConstructionSite)\>
 
 A hash containing all your construction sites with their id as hash keys.
 
-Game.cpu object
---------------
+## Game.cpu object
 
 An object containing information about your CPU usage with the following properties:
 
@@ -22,8 +19,7 @@ An object containing information about your CPU usage with the following propert
 | `unlocked`     | boolean               | Whether full CPU is currently unlocked for your account.                                                                                                                                                                                                                                                              |
 | `unlockedTime` | number                | The time [in milliseconds since UNIX epoch time](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax) until full CPU is unlocked for your account. This property is not defined when full CPU is not unlocked for your account or it's unlocked with a subscription. |
 
-Game.creeps object<string, [Creep](https://docs.screeps.com/api/#Creep)\>
-------------------------------------------------------------------------
+## Game.creeps object<string, [Creep](https://docs.screeps.com/api/#Creep)\>
 
 ```
 for(const i in Game.creeps) {
@@ -33,18 +29,14 @@ for(const i in Game.creeps) {
 
 A hash containing all your creeps with creep names as hash keys.
 
-Game.flags object<string, [Flag](https://docs.screeps.com/api/#Flag)\>
----------------------------------------------------------------------
-
+## Game.flags object<string, [Flag](https://docs.screeps.com/api/#Flag)\>
 ```
 creep.moveTo(Game.flags.Flag1);
 ```
 
 A hash containing all your flags with flag names as hash keys.
 
-Game.gcl object
---------------
-
+## Game.gcl object
 Your [Global Control Level](https://docs.screeps.com/control.html#Global-Control-Level), an object with the following properties :
 
 | parameter       | type   | description                                    |
@@ -53,9 +45,7 @@ Your [Global Control Level](https://docs.screeps.com/control.html#Global-Control
 | `progress`      | number | The current progress to the next level.        |
 | `progressTotal` | number | The progress required to reach the next level. |
 
-Game.gpl object
---------------
-
+## Game.gpl object
 Your Global Power Level, an object with the following properties :
 
 | parameter       | type   | description                                    |
@@ -64,38 +54,25 @@ Your Global Power Level, an object with the following properties :
 | `progress`      | number | The current progress to the next level.        |
 | `progressTotal` | number | The progress required to reach the next level. |
 
-Game.map object
---------------
-
+## Game.map object
 A global object representing world map. See the [documentation](https://docs.screeps.com/api/#Game-map) below.
 
-Game.market object
------------------
-
+# Game.market object
 A global object representing the in-game market. See the [documentation](https://docs.screeps.com/api/#Game-market) below.
 
-Game.powerCreeps object<string, [PowerCreep](https://docs.screeps.com/api/#PowerCreep)\>
----------------------------------------------------------------------------------------
-
+## Game.powerCreeps object<string, [PowerCreep](https://docs.screeps.com/api/#PowerCreep)\>
 ```
 Game.powerCreeps['PC1'].moveTo(flag);
 ```
-
 A hash containing all your power creeps with their names as hash keys. Even power creeps not spawned in the world can be accessed here.
 
-Game.resources object
---------------------
-
+## Game.resources object
 An object with your global resources that are bound to the account, like pixels or cpu unlocks. Each object key is a resource constant, values are resources amounts.
 
-Game.rooms object<string, [Room](https://docs.screeps.com/api/#Room)\>
----------------------------------------------------------------------
-
+## Game.rooms object<string, [Room](https://docs.screeps.com/api/#Room)\>
 A hash containing all the rooms available to you with room names as hash keys. A room is visible if you have a creep or an owned structure in it.
 
-Game.shard object
-----------------
-
+## Game.shard object
 An object describing the world shard where your script is currently being executed in.
 
 | parameter | type    | description                                                                 |
@@ -104,45 +81,33 @@ An object describing the world shard where your script is currently being execut
 | `type`    | string  | Currently always equals to `normal`.                                        |
 | `ptr`     | boolean | Whether this shard belongs to the [PTR](https://docs.screeps.com/ptr.html). |
 
-Game.spawns object<string, [StructureSpawn](https://docs.screeps.com/api/#StructureSpawn)\>
-------------------------------------------------------------------------------------------
-
+## Game.spawns object<string, [StructureSpawn](https://docs.screeps.com/api/#StructureSpawn)\>
 ```
 for(const i in Game.spawns) {
     Game.spawns[i].createCreep(body);
 }
 ```
-
 A hash containing all your spawns with spawn names as hash keys.
 
-Game.structures object<string, [Structure](https://docs.screeps.com/api/#Structure)\>
-------------------------------------------------------------------------------------
-
+## Game.structures object<string, [Structure](https://docs.screeps.com/api/#Structure)\>
 A hash containing all your structures with structure id as hash keys.
 
-Game.time number
----------------
-
+## Game.time number
 ```
 console.log(Game.time);
 ```
-
 System game tick counter. It is automatically incremented on every tick. [Learn more](https://docs.screeps.com/game-loop.html)
 
-Game.cpu.getHeapStatistics()
-------------------------------
-
+## Game.cpu.getHeapStatistics()
 ```
-let heap = Game.cpu.getHeapStatistics();
+const heap = Game.cpu.getHeapStatistics();
 console.log(`Used ${heap.total_heap_size} / ${heap.heap_size_limit}`);
 ```
-
 *This method is only available when **Virtual machine** is set to **Isolated** in your [account runtime settings](https://screeps.com/a/#!/account/runtime).*
 
 Use this method to get heap statistics for your virtual machine. The return value is almost identical to the Node.js function [`v8.getHeapStatistics()`](https://nodejs.org/dist/latest-v8.x/docs/api/v8.html#v8_v8_getheapstatistics). This function returns one additional property: `externally_allocated_size` which is the total amount of currently allocated memory which is not included in the v8 heap but counts against this isolate's memory limit. `ArrayBuffer` instances over a certain size are externally allocated and will be counted here.
 
 ### Return value
-
 Returns an objects with heap statistics in the following format:
 
 ```
@@ -160,8 +125,7 @@ Returns an objects with heap statistics in the following format:
 }
 ```
 
-Game.cpu.getUsed()
---------------------
+## Game.cpu.getUsed()
 
 ```
 if(Game.cpu.getUsed() > Game.cpu.tickLimit / 2) {
@@ -183,12 +147,9 @@ for(const name in Game.creeps) {
 Get amount of CPU time used from the beginning of the current game tick. Always returns 0 in the Simulation mode.
 
 ### Return value
-
 Returns currently used CPU time as a float number.
 
-Game.cpu.halt()
------------------
-
+## Game.cpu.halt()
 ```
 Game.cpu.halt();
 ```
@@ -197,9 +158,7 @@ Game.cpu.halt();
 
 Reset your runtime environment and wipe all data in heap memory.
 
-Game.cpu.setShardLimits(limits)
----------------------------------
-
+## Game.cpu.setShardLimits(limits)
 ```
 Game.cpu.setShardLimits({shard0: 20, shard1: 10});
 ```
@@ -211,7 +170,6 @@ Allocate CPU limits to different shards. Total amount of CPU should remain equal
 | `limits`  | object<string, number> | An object with CPU values for each shard in the same format as `Game.cpu.shardLimits`. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                      |
@@ -220,9 +178,7 @@ One of the following codes:
 | `ERR_BUSY`         | \-4   | 12-hours cooldown period is not over yet.        |
 | `ERR_INVALID_ARGS` | \-10  | The argument is not a valid shard limits object. |
 
-Game.cpu.unlock()
--------------------
-
+## Game.cpu.unlock()
 ```
 if(Game.cpu.unlockedTime && ((Game.cpu.unlockedTime - Date.now()) < 1000*60*60*24)) {
     Game.cpu.unlock();
@@ -232,7 +188,6 @@ if(Game.cpu.unlockedTime && ((Game.cpu.unlockedTime - Date.now()) < 1000*60*60*2
 Unlock full CPU for your account for additional 24 hours. This method will consume 1 CPU unlock bound to your account (See [`Game.resources`](https://docs.screeps.com/api/#Game.resources)). If full CPU is not currently unlocked for your account, it may take some time (up to 5 minutes) before unlock is applied to your account.
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                             |
@@ -241,8 +196,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | Your account does not have enough `cpuUnlock` resource. |
 | `ERR_FULL`                 | \-8   | Your CPU is unlocked with a subscription.               |
 
-Game.cpu.generatePixel()
---------------------------
+## Game.cpu.generatePixel()
 
 ```
 if(Game.cpu.bucket == 10000) {
@@ -257,9 +211,7 @@ Generate 1 pixel resource unit for 10000 CPU from your bucket.
 | `OK`                       | 0     | The operation has been scheduled successfully. |
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | Your bucket does not have enough CPU.          |
 
-Game.getObjectById(id)
-------------------------
-
+## Game.getObjectById(id)
 ```
 creep.memory.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
 const source = Game.getObjectById(creep.memory.sourceId);
@@ -272,16 +224,14 @@ Get an object with the specified unique ID. It may be a game object of any type.
 | `id`      | string | The unique identifier. |
 
 ### Return value
-
 Returns an object instance or null if it cannot be found.
 
-Game.notify(message, \[groupInterval\])
------------------------------------------
-
+## Game.notify(message, \[groupInterval\])
 ```
 if(creep.hits < creep.memory.lastHits) {
     Game.notify('Creep '+creep+' has been attacked at '+creep.pos+'!');
 }
+
 creep.memory.lastHits = creep.hits;
 ```
 ```
@@ -301,25 +251,19 @@ Send a custom message at your profile email. This way, you can set up notificati
 | `message`       | string | Custom text which will be sent in the message. Maximum length is 1000 characters.                                                                                                       |
 | `groupInterval` | number | If set to 0 (default), the notification will be scheduled immediately. Otherwise, it will be grouped with other notifications and mailed out later using the specified time in minutes. |
 
-InterShardMemory
-================
-
+# InterShardMemory
 `InterShardMemory` object provides an interface for communicating between shards. Your script is executed separately on each shard, and their [`Memory`](https://docs.screeps.com/api/#Memory) objects are isolated from each other. In order to pass messages and data between shards, you need to use `InterShardMemory` instead.
 
 Every shard can have its own 100 KB of data in string format that can be accessed by all other shards. A shard can write only to its own data, other shards' data is read-only.
 
 This data has nothing to do with `Memory` contents, it's a separate data container.
 
-InterShardMemory.getLocal()
------------------------------
-
+## InterShardMemory.getLocal()
 Returns the string contents of the current shard's data.
 
-InterShardMemory.setLocal(value)
-----------------------------------
-
+## InterShardMemory.setLocal(value)
 ```
-var data = JSON.parse(InterShardMemory.getLocal() || "{}");
+const data = JSON.parse(InterShardMemory.getLocal() || "{}");
 data.message = "hello from another shard!";
 InterShardMemory.setLocal(JSON.stringify(data));
 ```
@@ -330,11 +274,9 @@ Replace the current shard's data with the new value.
 |-----------|--------|----------------------------------|
 | `value`   | string | New data value in string format. |
 
-InterShardMemory.getRemote(shard)
------------------------------------
-
+## InterShardMemory.getRemote(shard)
 ```
-var data = JSON.parse(InterShardMemory.getRemote('shard0') || "{}");
+const data = JSON.parse(InterShardMemory.getRemote('shard0') || "{}");
 console.log(data.message);
 ```
 
@@ -344,14 +286,10 @@ Returns the string contents of another shard's data.
 |-----------|--------|-------------|
 | `shard`   | string | Shard name. |
 
-Game.map
-========
-
+# Game.map
 A global object representing world map. Use it to navigate between rooms.
 
-Game.map.describeExits(roomName)
-----------------------------------
-
+## Game.map.describeExits(roomName)
 ```
 const exits = Game.map.describeExits('W8N3');
 ```
@@ -375,16 +313,14 @@ The exits information in the following format, or null if the room not found.
 }
 ```
 
-Game.map.findExit(fromRoom, toRoom, \[opts\])
------------------------------------------------
+## Game.map.findExit(fromRoom, toRoom, \[opts\])
 
 ```
-if(creep.room != anotherRoomName) {
+if (creep.room !== anotherRoomName) {
     const exitDir = Game.map.findExit(creep.room, anotherRoomName);
     const exit = creep.pos.findClosestByRange(exitDir);
     creep.moveTo(exit);
-}
-else {
+} else {
     // go to some place in another room
 }
 ```
@@ -401,7 +337,6 @@ Find the exit direction from the given room en route to another room.
 | `opts`*optional* | object                                               | An object with the pathfinding options. See `[findRoute](https://docs.screeps.com/api/#findRoute)`. |
 
 ### Return value
-
 The room direction constant, one of the following:
 
 -   `FIND_EXIT_TOP`
@@ -416,12 +351,11 @@ Or one of the following error codes:
 | `ERR_NO_PATH`      | \-2   | Path can not be found.     |
 | `ERR_INVALID_ARGS` | \-10  | The location is incorrect. |
 
-Game.map.findRoute(fromRoom, toRoom, \[opts\])
-------------------------------------------------
+## Game.map.findRoute(fromRoom, toRoom, \[opts\])
 
 ```
 const route = Game.map.findRoute(creep.room, anotherRoomName);
-if(route.length > 0) {
+if (route.length > 0) {
     console.log('Now heading to room '+route[0].room);
     const exit = creep.pos.findClosestByRange(route[0].exit);
     creep.moveTo(exit);
@@ -430,7 +364,7 @@ if(route.length > 0) {
 ```
 const route = Game.map.findRoute(creep.room, anotherRoomName, {
     routeCallback(roomName, fromRoomName) {
-        if(roomName == 'W10S10') {    // avoid this room
+        if (roomName === 'W10S10') {    // avoid this room
             return Infinity;
         }
         return 1;
@@ -482,7 +416,6 @@ Find route from the given room to another room.
 | `opts`*optional* | object                                               | An object with the following options:-   routeCallback     function    This callback accepts two arguments: `function(roomName, fromRoomName)`. It can be used to calculate the cost of entering that room. You can use this to do things like prioritize your own rooms, or avoid some rooms. You can return a floating point cost or `Infinity` to block the room. |
 
 ### Return value
-
 The route array in the following format:
 
 ```
@@ -499,9 +432,7 @@ Or one of the following error codes:
 |---------------|-------|------------------------|
 | `ERR_NO_PATH` | \-2   | Path can not be found. |
 
-Game.map.getRoomLinearDistance(roomName1, roomName2, \[continuous\])
-----------------------------------------------------------------------
-
+## Game.map.getRoomLinearDistance(roomName1, roomName2, \[continuous\])
 ```
 Game.map.getRoomLinearDistance('W1N1', 'W4N2'); // 3
 Game.map.getRoomLinearDistance('E65S55','W65S55', false) // 131
@@ -517,15 +448,12 @@ Get the linear distance (in rooms) between two rooms. You can use this function 
 | `continuous`*optional* | boolean | Whether to treat the world map continuous on borders. Set to true if you want to calculate the trade or terminal send cost. Default is false. |
 
 ### Return value
-
 A number of rooms between the given two rooms.
 
-Game.map.getRoomTerrain(roomName)
------------------------------------
-
+## Game.map.getRoomTerrain(roomName)
 ```
 const terrain = Game.map.getRoomTerrain("E2S7");
-switch(terrain.get(10,15)) {
+switch (terrain.get(10,15)) {
     case TERRAIN_MASK_WALL:
         break;
     case TERRAIN_MASK_SWAMP:
@@ -542,12 +470,9 @@ Get a [`Room.Terrain`](https://docs.screeps.com/api/#Room-Terrain) object which 
 | `roomName` | string | The room name. |
 
 ### Return value
-
 Returns new [`Room.Terrain`](https://docs.screeps.com/api/#Room-Terrain) object.
 
-Game.map.getTerrainAt(x, y, roomName) (pos)
----------------------------------------------
-
+## Game.map.getTerrainAt(x, y, roomName) (pos)
 This method is deprecated and will be removed soon. Please use a faster method [`Game.map.getRoomTerrain`](https://docs.screeps.com/api/#Game.map.getRoomTerrain) instead.
 
 ```
@@ -567,25 +492,20 @@ Get terrain type at the specified room position. This method works for any room 
 | `pos`      | [RoomPosition](https://docs.screeps.com/api/#RoomPosition) | The position object.    |
 
 ### Return value
-
 One of the following string values:
 
 -   `plain`
 -   `swamp`
 -   `wall`
 
-Game.map.getWorldSize()
--------------------------
-
+## Game.map.getWorldSize()
 Returns the world size as a number of rooms between world corners. For example, for a world with rooms from W50N50 to E50S50 this method will return 102.
 
-Game.map.isRoomAvailable(roomName)
-------------------------------------
-
+## Game.map.isRoomAvailable(roomName)
 This method is deprecated and will be removed soon. Please use [`Game.map.getRoomStatus`](https://docs.screeps.com/api/#Game.map.getRoomStatus) instead.
 
 ```
-if(Game.map.isRoomAvailable(room.name)) {
+if (Game.map.isRoomAvailable(room.name)) {
     creep.moveTo(room.getPositionAt(25,25));
 }
 ```
@@ -597,14 +517,12 @@ Check if the room is available to move into.
 | `roomName` | string | The room name. |
 
 ### Return value
-
 A boolean value.
 
-Game.map.getRoomStatus(roomName)
-----------------------------------
+## Game.map.getRoomStatus(roomName)
 
 ```
-if(Game.map.getRoomStatus(room.name).status == 'normal') {
+if (Game.map.getRoomStatus(room.name).status === 'normal') {
     nuker.launchNuke(room.getPositionAt(25,25));
 }
 ```
@@ -616,7 +534,6 @@ Gets availability status of the room with the specified name. Learn more about s
 | `roomName` | string | The room name. |
 
 ### Return value
-
 An object containing the following properties:
 
 | property    | type   | description                                                                                                                                                                                                                  |
@@ -624,21 +541,16 @@ An object containing the following properties:
 | `status`    | string | One of the following string values:-   `normal` -- the room has no restrictions-   `closed` -- the room is not available-   `novice` -- the room is part of a novice area-   `respawn` -- the room is part of a respawn area |
 | `timestamp` | number | Status expiration time [in milliseconds since UNIX epoch time](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax). This property is null if the status is permanent.      |
 
-Game.map.visual
-===============
-
+# Game.map.visual
 Map visuals provide a way to show various visual debug info on the game map. You can use the `Game.map.visual` object to draw simple shapes that are visible only to you.
 
 Map visuals are not stored in the database, their only purpose is to display something in your browser. All drawings will persist for one tick and will disappear if not updated. All `Game.map.visual` calls have no added CPU cost (their cost is natural and mostly related to simple `JSON.serialize` calls). However, there is a usage limit: you cannot post more than 1000 KB of serialized data.
 
 All draw coordinates are measured in global game coordinates ([`RoomPosition`](https://docs.screeps.com/api/#RoomPosition)).
 
-line(pos1, pos2, \[style\])
------------------------------
-
+## line(pos1, pos2, \[style\])
 ```
-Game.map.visual.line(creep.pos, target.pos,
-    {color: '#ff0000', lineStyle: 'dashed'});
+Game.map.visual.line(creep.pos, target.pos, { color: '#ff0000', lineStyle: 'dashed' });
 ```
 
 Draw a line.
@@ -650,17 +562,14 @@ Draw a line.
 | `style`*optional* | object                                                     | An object with the following properties:-   width     number    Line width, default is 0.1.    -   color     string    Line color in the following format: `#ffffff` (hex triplet). Default is #ffffff.    -   opacity     number    Opacity value, default is 0.5.    -   lineStyle     string    Either `undefined` (solid line), `dashed`, or `dotted`. Default is undefined. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-circle(pos, \[style\])
-------------------------
-
+## circle(pos, \[style\])
 ```
 Game.map.visual.circle(new RoomPosition(25,25,'E2S7'));
 ```
 ```
-Game.map.visual.circle(nuker.pos, {fill: 'transparent', radius: NUKE_RANGE*50, stroke: '#ff0000'});
+Game.map.visual.circle(nuker.pos, { fill: 'transparent', radius: NUKE_RANGE*50, stroke: '#f00' });
 ```
 
 Draw a circle.
@@ -671,12 +580,9 @@ Draw a circle.
 | `style`*optional* | object                                                     | An object with the following properties:-   radius     number    Circle radius, default is 10.    -   fill     string    Fill color in the following format: `#ffffff` (hex triplet). Default is #ffffff.    -   opacity     number    Opacity value, default is 0.5.    -   stroke     string    Stroke color in the following format: `#ffffff` (hex triplet). Default is undefined (no stroke).    -   strokeWidth     number    Stroke line width, default is 0.5.    -   lineStyle     string    Either `undefined` (solid line), `dashed`, or `dotted`. Default is undefined. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-rect(topLeftPos, width, height, \[style\])
---------------------------------------------
-
+## rect(topLeftPos, width, height, \[style\])
 ```
 // the max efficiency area of the tower
 Game.map.visual.rect(new RoomPosition(tower.pos.x - 5, tower.pos.y - 5, tower.pos.roomName),
@@ -694,23 +600,20 @@ Draw a rectangle.
 | `style`*optional* | object                                                     | An object with the following properties:-   fill     string    Fill color in the following format: `#ffffff` (hex triplet). Default is #ffffff.    -   opacity     number    Opacity value, default is 0.5.    -   stroke     string    Stroke color in the following format: `#ffffff` (hex triplet). Default is undefined (no stroke).    -   strokeWidth     number    Stroke line width, default is 0.5.    -   lineStyle     string    Either `undefined` (solid line), `dashed`, or `dotted`. Default is undefined. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-poly(points, \[style\])
--------------------------
-
+## poly(points, \[style\])
 ```
 const points = [];
 points.push(creep1.pos);
 points.push(Game.rooms.E2S7.storage.pos);
 points.push(new RoomPosition(20,21,'W1N1'));
-Game.map.visual.poly(points, {fill: 'aqua'});
+Game.map.visual.poly(points, { fill: 'aqua' });
 ```
 ```
 // visualize the path
 const path = PathFinder.search(creep.pos, creep.room.storage.pos).path;
-Game.map.visual.poly(path, {stroke: '#ffffff', strokeWidth: .8, opacity: .2, lineStyle: 'dashed'});
+Game.map.visual.poly(path, { stroke: '#fff', strokeWidth: .8, opacity: .2, lineStyle: 'dashed' });
 ```
 
 Draw a polyline.
@@ -721,14 +624,11 @@ Draw a polyline.
 | `style`*optional* | object | An object with the following properties:-   fill     string    Fill color in the following format: `#ffffff` (hex triplet). Default is `undefined` (no fill).    -   opacity     number    Opacity value, default is 0.5.    -   stroke     string    Stroke color in the following format: `#ffffff` (hex triplet). Default is #ffffff.    -   strokeWidth     number    Stroke line width, default is 0.5.    -   lineStyle     string    Either `undefined` (solid line), `dashed`, or `dotted`. Default is undefined. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-text(text, pos, \[style\])
-----------------------------
-
+## text(text, pos, \[style\])
 ```
-Game.map.visual.text("Target💥", new RoomPosition(11,14,'E2S7'), {color: '#FF0000', fontSize: 10});
+Game.map.visual.text("Target💥", new RoomPosition(11,14,'E2S7'), { color: '#FF0000', fontSize: 10 });
 ```
 
 Draw a text label. You can use any valid Unicode characters, including [emoji](http://unicode.org/emoji/charts/emoji-style.txt).
@@ -740,12 +640,9 @@ Draw a text label. You can use any valid Unicode characters, including [emoji](h
 | `style`*optional* | object                                                     | An object with the following properties:-   color     string    Font color in the following format: `#ffffff` (hex triplet). Default is #ffffff.    -   fontFamily     string    The font family, default is `sans-serif`    -   fontSize     number    The font size in game coordinates, default is 10    -   fontStyle     string    The font style ('normal', 'italic' or 'oblique')    -   fontVariant     string    The font variant ('normal' or 'small-caps')    -   stroke     string    Stroke color in the following format: `#ffffff` (hex triplet). Default is undefined (no stroke).    -   strokeWidth     number    Stroke width, default is 0.15.    -   backgroundColor     string    Background color in the following format: `#ffffff` (hex triplet). Default is undefined (no background). When background is enabled, text vertical align is set to middle (default is baseline).    -   backgroundPadding     number    Background rectangle padding, default is 2.    -   align     string    Text align, either `center`, `left`, or `right`. Default is `center`.    -   opacity     number    Opacity value, default is 0.5. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-clear()
----------
-
+## clear()
 ```
 Game.map.visual.clear();
 ```
@@ -753,14 +650,11 @@ Game.map.visual.clear();
 Remove all visuals from the map.
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-getSize()
------------
-
+## getSize()
 ```
-if(Game.map.visual.getSize() >= 1024000) {
+if(Game.map.visual.getSize() >== 1024000) {
     // cannot add more visuals in this tick
 }
 ```
@@ -768,12 +662,9 @@ if(Game.map.visual.getSize() >= 1024000) {
 Get the stored size of all visuals added on the map in the current tick. It must not exceed 1024,000 (1000 KB).
 
 ### Return value
-
 The size of the visuals in bytes.
 
-export()
-----------
-
+## export()
 ```
 Memory.MapVisualData = Game.map.visual.export();
 ```
@@ -781,12 +672,9 @@ Memory.MapVisualData = Game.map.visual.export();
 Returns a compact representation of all visuals added on the map in the current tick.
 
 ### Return value
-
 A string with visuals data. There's not much you can do with the string besides store them for later.
 
-import(val)
--------------
-
+## import(val)
 ```
 Game.map.visual.import(Memory.MapVisualData);
 ```
@@ -798,23 +686,17 @@ Add previously exported (with [Game.map.visual.export](https://docs.screeps.com/
 | `val`     | string | The string returned from Game.map.visual.export. |
 
 ### Return value
-
 The `MapVisual` object itself, so that you can chain calls.
 
-Game.market
-===========
-
+# Game.market
 A global object representing the in-game market. You can use this object to track resource transactions to/from your terminals, and your buy/sell orders.
 
 Learn more about the market system from [this article](https://docs.screeps.com/market.html).
 
-Game.market.credits number
--------------------------
-
+## Game.market.credits number
 Your current credits balance.
 
-Game.market.incomingTransactions array
--------------------------------------
+## Game.market.incomingTransactions array
 
 ```
 [{
@@ -837,15 +719,14 @@ Game.market.incomingTransactions array
 
 An array of the last 100 incoming transactions to your terminals with the following format:
 
-Game.market.outgoingTransactions array
--------------------------------------
+## Game.market.outgoingTransactions array
 
 ```
 [{
     transactionId : "56dec546a180ce641dd65960",
     time : 10390687,
-    sender : {username: "Me"},
-    recipient : {username: "Recipient"},
+    sender : { username: "Me" },
+    recipient : { username: "Recipient" },
     resourceType : "U",
     amount : 100,
     from : "W0N0",
@@ -861,8 +742,7 @@ Game.market.outgoingTransactions array
 
 An array of the last 100 outgoing transactions from your terminals with the following format:
 
-Game.market.orders object
-------------------------
+## Game.market.orders object
 
 ```
 {
@@ -906,8 +786,7 @@ Game.market.orders object
 
 An object with your active and inactive buy/sell orders on the market. See [`getAllOrders`](https://docs.screeps.com/api/#getAllOrders) for properties explanation.
 
-Game.market.calcTransactionCost(amount, roomName1, roomName2)
----------------------------------------------------------------
+## Game.market.calcTransactionCost(amount, roomName1, roomName2)
 
 ```
 const cost = Game.market.calcTransactionCost(1000, 'W0N0', 'W10N5');
@@ -927,11 +806,9 @@ Math.ceil( amount * ( 1 - Math.exp(-distanceBetweenRooms/30) ) )
 | `roomName2` | string | The name of the second room.    |
 
 ### Return value
-
 The amount of energy required to perform the transaction.
 
-Game.market.cancelOrder(orderId)
-----------------------------------
+## Game.market.cancelOrder(orderId)
 
 ```
 for(const id in Game.market.orders) {
@@ -946,7 +823,6 @@ Cancel a previously created order. The 5% fee is not returned.
 | `orderId` | string | The order ID as provided in `Game.market.orders`. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -954,9 +830,7 @@ One of the following codes:
 | `OK`               | 0     | The operation has been scheduled successfully. |
 | `ERR_INVALID_ARGS` | \-10  | The order ID is not valid.                     |
 
-Game.market.changeOrderPrice(orderId, newPrice)
--------------------------------------------------
-
+## Game.market.changeOrderPrice(orderId, newPrice)
 ```
 Game.market.changeOrderPrice('57bec1bf77f4d17c4c011960', 9.95);
 ```
@@ -969,7 +843,6 @@ Change the price of an existing order. If `newPrice` is greater than old price, 
 | `newPrice` | number | The new order price.                              |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                           |
@@ -979,9 +852,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | You don't have enough credits to pay a fee.                           |
 | `ERR_INVALID_ARGS`         | \-10  | The arguments provided are invalid.                                   |
 
-Game.market.createOrder(params)
----------------------------------
-
+## Game.market.createOrder(params)
 ```
 Game.market.createOrder({
     type: ORDER_SELL,
@@ -999,7 +870,6 @@ Create a market order in your terminal. You will be charged `price*amount*0.05` 
 | `params`  | object | An object with the following params:-   type     string    The order type, either `ORDER_SELL` or `ORDER_BUY`.    -   resourceType     string    Either one of the `RESOURCE_*` constants or one of account-bound resources (See `INTERSHARD_RESOURCES` constant). If your Terminal doesn't have the specified resource, the order will be temporary inactive.    -   price     number    The price for one resource unit in credits. Can be a decimal number.    -   totalAmount     number    The amount of resources to be traded in total.    -   roomName (optional)     string    The room where your order will be created. You must have your own Terminal structure in this room, otherwise the created order will be temporary inactive. This argument is not used when `resourceType` is one of account-bound resources (See `INTERSHARD_RESOURCES` constant). |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                           |
@@ -1010,9 +880,7 @@ One of the following codes:
 | `ERR_FULL`                 | \-8   | You cannot create more than 50 orders.                                |
 | `ERR_INVALID_ARGS`         | \-10  | The arguments provided are invalid.                                   |
 
-Game.market.deal(orderId, amount, \[yourRoomName\])
------------------------------------------------------
-
+## Game.market.deal(orderId, amount, \[yourRoomName\])
 ```
 Game.market.deal('57cd2b12cda69a004ae223a3', 1000, "W1N1");
 ```
@@ -1020,7 +888,7 @@ Game.market.deal('57cd2b12cda69a004ae223a3', 1000, "W1N1");
 const amountToBuy = 2000, maxTransferEnergyCost = 500;
 const orders = Game.market.getAllOrders({type: ORDER_SELL, resourceType: RESOURCE_GHODIUM});
 
-for(let i=0; i<orders.length; i++) {
+for(const i=0; i<orders.length; i++) {
     const transferEnergyCost = Game.market.calcTransactionCost(
         amountToBuy, 'W1N1', orders[i].roomName);
 
@@ -1040,7 +908,6 @@ Execute a trade deal from your Terminal in `yourRoomName` to another player's Te
 | `yourRoomName`*optional* | string | The name of your room which has to contain an active Terminal with enough amount of energy. This argument is not used when the order resource type is one of account-bound resources (See `INTERSHARD_RESOURCES` constant). |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                            |
@@ -1052,9 +919,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`         | \-10  | The arguments provided are invalid.                    |
 | `ERR_TIRED`                | \-11  | The target terminal is still cooling down.             |
 
-Game.market.extendOrder(orderId, addAmount)
----------------------------------------------
-
+## Game.market.extendOrder(orderId, addAmount)
 ```
 Game.market.extendOrder('57bec1bf77f4d17c4c011960', 10000);
 ```
@@ -1067,7 +932,6 @@ Add more capacity to an existing order. It will affect `remainingAmount` and `to
 | `addAmount` | number | How much capacity to add. Cannot be a negative value. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                    |
@@ -1076,9 +940,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | You don't have enough credits to pay a fee.    |
 | `ERR_INVALID_ARGS`         | \-10  | The arguments provided are invalid.            |
 
-Game.market.getAllOrders(\[filter\])
---------------------------------------
-
+## Game.market.getAllOrders(\[filter\])
 ```
 Game.market.getAllOrders(); // slow
 ```
@@ -1087,9 +949,9 @@ Game.market.getAllOrders({type: ORDER_SELL, resourceType: RESOURCE_GHODIUM}); //
 ```
 ```
 const targetRoom = "W1N1";
-Game.market.getAllOrders(order => order.resourceType == RESOURCE_GHODIUM &&
-    order.type == ORDER_SELL &&
-    Game.market.calcTransactionCost(1000, targetRoom, order.roomName) < 500); // slow
+Game.market.getAllOrders(order => order.resourceType === RESOURCE_GHODIUM
+    && order.type === ORDER_SELL
+    && Game.market.calcTransactionCost(1000, targetRoom, order.roomName) < 500); // slow
 ```
 ```
 // Output:
@@ -1131,7 +993,6 @@ Get other players' orders currently active on the market. This method supports i
 | `filter`*optional* | object \| function | An object or function that will filter the resulting list using the [`lodash.filter`](https://lodash.com/docs#filter) method. |
 
 ### Return value
-
 An orders array in the following form:
 
 | property           | description                                                                                                                                                                                                    |
@@ -1146,9 +1007,7 @@ An orders array in the following form:
 | `remainingAmount`  | How many resources are left to trade via this order.                                                                                                                                                           |
 | `price`            | The current price per unit.                                                                                                                                                                                    |
 
-Game.market.getHistory(\[resourceType\])
-------------------------------------------
-
+## Game.market.getHistory(\[resourceType\])
 Get daily price history of the specified resource on the market for the last 14 days.
 
 | parameter                | type   | description                                                                              |
@@ -1156,7 +1015,6 @@ Get daily price history of the specified resource on the market for the last 14 
 | `resourceType`*optional* | string | One of the `RESOURCE_*` constants. If undefined, returns history data for all resources. |
 
 ### Return value
-
 Returns an array of objects with the following format:
 
 ```
@@ -1170,9 +1028,7 @@ Returns an array of objects with the following format:
 }]
 ```
 
-Game.market.getOrderById(id)
-------------------------------
-
+## Game.market.getOrderById(id)
 ```
 const order = Game.market.getOrderById('55c34a6b5be41a0a6e80c123');
 ```
@@ -1184,22 +1040,15 @@ Retrieve info for specific market order.
 | `id`      | string | The order ID. |
 
 ### Return value
-
 An object with the order info. See [`getAllOrders`](https://docs.screeps.com/api/#getAllOrders) for properties explanation.
 
-Memory
-======
-
+# Memory
 A global plain object which can contain arbitrary data. You can access it both using the API and the Memory UI in the game editor. Learn how to work with memory from [this article](http://docs.screeps.com/global-objects.html#Memory-object).
 
-PathFinder
-==========
-
+# PathFinder
 Contains powerful methods for pathfinding in the game world. This module is written in fast native C++ code and supports custom navigation costs and paths which span multiple rooms.
 
-PathFinder.search(origin, goal, \[opts\])
--------------------------------------------
-
+## PathFinder.search(origin, goal, \[opts\])
 ```
   let creep = Game.creeps.John;
 
@@ -1218,21 +1067,21 @@ PathFinder.search(origin, goal, \[opts\])
       swampCost: 10,
 
       roomCallback: function(roomName) {
-
         let room = Game.rooms[roomName];
         // In this example `room` will always exist, but since
         // PathFinder supports searches which span multiple rooms
         // you should be careful!
         if (!room) return;
+
         let costs = new PathFinder.CostMatrix;
 
         room.find(FIND_STRUCTURES).forEach(function(struct) {
           if (struct.structureType === STRUCTURE_ROAD) {
             // Favor roads over plain tiles
             costs.set(struct.pos.x, struct.pos.y, 1);
-          } else if (struct.structureType !== STRUCTURE_CONTAINER &&
-                     (struct.structureType !== STRUCTURE_RAMPART ||
-                      !struct.my)) {
+          } else if (struct.structureType !== STRUCTURE_CONTAINER
+              && (struct.structureType !== STRUCTURE_RAMPART
+                || !struct.my)) {
             // Can't walk through non-walkable buildings
             costs.set(struct.pos.x, struct.pos.y, 0xff);
           }
@@ -1261,7 +1110,6 @@ Find an optimal path between `origin` and `goal`.
 | `opts`*optional* | object                                                     | An object containing additional pathfinding flags.-   roomCallback     function    Request from the pathfinder to generate a [`CostMatrix`](https://docs.screeps.com/api/#PathFinder-CostMatrix) for a certain room. The callback accepts one argument, `roomName`. This callback will only be called once per room per search. If you are running multiple pathfinding operations in a single room and in a single tick you may consider caching your CostMatrix to speed up your code. Please read the CostMatrix documentation below for more information on CostMatrix. If you return `false` from the callback the requested room will not be searched, and it won't count against `maxRooms`    -   plainCost     number    Cost for walking on plain positions. The default is 1.    -   swampCost     number    Cost for walking on swamp positions. The default is 5.    -   flee     boolean    Instead of searching for a path *to* the goals this will search for a path *away* from the goals. The cheapest path that is out of `range` of every goal will be returned. The default is false.    -   maxOps     number    The maximum allowed pathfinding operations. You can limit CPU time used for the search based on ratio 1 op ~ 0.001 CPU. The default value is 2000.    -   maxRooms     number    The maximum allowed rooms to search. The default is 16, maximum is 64.    -   maxCost     number    The maximum allowed cost of the path returned. If at any point the pathfinder detects that it is impossible to find a path with a cost less than or equal to `maxCost` it will immediately halt the search. The default is Infinity.    -   heuristicWeight     number    Weight to apply to the heuristic in the A\* formula `F = G + weight * H`. Use this option only if you understand the underlying A\* algorithm mechanics! The default value is 1.2. |
 
 ### Return value
-
 An object containing the following properties:
 
 | property     | description                                                                                                                                                                                                   |
@@ -1271,9 +1119,7 @@ An object containing the following properties:
 | `cost`       | The total cost of the path as derived from `plainCost`, `swampCost` and any given CostMatrix instances.                                                                                                       |
 | `incomplete` | If the pathfinder fails to find a complete path, this will be true. Note that `path` will still be populated with a partial path which represents the closest path it could find given the search parameters. |
 
-PathFinder.use(isEnabled)
----------------------------
-
+## PathFinder.use(isEnabled)
 This method is deprecated and will be removed soon.
 
 ```
@@ -1287,16 +1133,12 @@ Specify whether to use this new experimental pathfinder in game objects methods.
 |-------------|---------|------------------------------------------------------------------------------|
 | `isEnabled` | boolean | Whether to activate the new pathfinder or deactivate. The default is `true`. |
 
-RawMemory
-=========
-
+# RawMemory
 RawMemory object allows to implement your own memory stringifier instead of built-in serializer based on `JSON.stringify`. It also allows to request up to 10 MB of additional memory using asynchronous memory segments feature.
 
 You can also access memory segments of other players using methods below.
 
-RawMemory.segments object
-------------------------
-
+## RawMemory.segments object
 ```
 RawMemory.setActiveSegments([0,3]);
 // on the next tick
@@ -1307,15 +1149,12 @@ RawMemory.segments[3] = '{"foo": "bar", "counter": 15}';
 
 An object with asynchronous memory segments available on this tick. Each object key is the segment ID with data in string values. Use [`setActiveSegments`](https://docs.screeps.com/api/#RawMemory.setActiveSegments) to fetch segments on the next tick. Segments data is saved automatically in the end of the tick. The maximum size per segment is 100 KB.
 
-RawMemory.foreignSegment object
-------------------------------
-
+## RawMemory.foreignSegment object
 ```
 RawMemory.setActiveForeignSegment('player');
 // on the next tick
 console.log(RawMemory.foreignSegment);
 // --> {"username": "player", "id": 40, "data": "Hello!"}
-
 ```
 
 An object with a memory segment of another player available on this tick. Use [`setActiveForeignSegment`](https://docs.screeps.com/api/#RawMemory.setActiveForeignSegment) to fetch segments on the next tick. The object consists of the following properties:
@@ -1326,17 +1165,15 @@ An object with a memory segment of another player available on this tick. Use [`
 | `id`       | number | The ID of the requested memory segment. |
 | `data`     | string | The segment contents.                   |
 
-RawMemory.interShardSegment string
----------------------------------
-
+## RawMemory.interShardSegment string
 This property is deprecated and will be removed soon. Please use [`InterShardMemory`](https://docs.screeps.com/api/#InterShardMemory) instead.
 
 ```
 RawMemory.interShardSegment = JSON.stringify({
-    creeps: {
-        Bob: {role: 'claimer'}
-    }
-});
+      creeps: {
+        Bob: { role: 'claimer' }
+      }
+    });
 
 // on another shard
 var interShardData = JSON.parse(RawMemory.interShardSegment);
@@ -1344,6 +1181,7 @@ if(interShardData.creeps[creep.name]) {
     creep.memory = interShardData[creep.name];
     delete interShardData.creeps[creep.name];
 }
+
 RawMemory.interShardSegment = JSON.stringify(interShardData);
 ```
 
@@ -1351,9 +1189,7 @@ A string with a shared memory segment available on every world shard. Maximum st
 
 **Warning:** this segment is not safe for concurrent usage! All shards have shared access to the same instance of data. When the segment contents is changed by two shards simultaneously, you may lose some data, since the segment string value is written all at once atomically. You must implement your own system to determine when each shard is allowed to rewrite the inter-shard memory, e.g. based on [mutual exclusions](https://en.wikipedia.org/wiki/Mutual_exclusion).
 
-RawMemory.get()
------------------
-
+## RawMemory.get()
 ```
 const myMemory = JSON.parse(RawMemory.get());
 ```
@@ -1361,12 +1197,9 @@ const myMemory = JSON.parse(RawMemory.get());
 Get a raw string representation of the `Memory` object.
 
 ### Return value
-
 Returns a string value.
 
-RawMemory.set(value)
-----------------------
-
+## RawMemory.set(value)
 ```
 RawMemory.set(JSON.stringify(myMemory));
 ```
@@ -1377,9 +1210,7 @@ Set new `Memory` value.
 |-----------|--------|-------------------------------|
 | `value`   | string | New memory value as a string. |
 
-RawMemory.setActiveSegments(ids)
-----------------------------------
-
+## RawMemory.setActiveSegments(ids)
 ```
 RawMemory.setActiveSegments([0,3]);
 ```
@@ -1390,9 +1221,7 @@ Request memory segments using the list of their IDs. Memory segments will become
 |-----------|-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ids`     | array | An array of segment IDs. Each ID should be a number from 0 to 99. Maximum 10 segments can be active at the same time. Subsequent calls of `setActiveSegments` override previous ones. |
 
-RawMemory.setActiveForeignSegment(username, \[id\])
------------------------------------------------------
-
+## RawMemory.setActiveForeignSegment(username, \[id\])
 ```
 RawMemory.setActiveForeignSegment('player');
 ```
@@ -1410,9 +1239,7 @@ Request a memory segment of another user. The segment should be marked by its ow
 | `username`     | string \| null | The name of another user. Pass `null` to clear the foreign segment.                                                                                                                                                |
 | `id`*optional* | number         | The ID of the requested segment from 0 to 99. If undefined, the user's default public segment is requested as set by [`setDefaultPublicSegment`](https://docs.screeps.com/api/#RawMemory.setDefaultPublicSegment). |
 
-RawMemory.setDefaultPublicSegment(id)
----------------------------------------
-
+## RawMemory.setDefaultPublicSegment(id)
 ```
 RawMemory.setPublicSegments([5,20,21]);
 RawMemory.setDefaultPublicSegment(5);
@@ -1427,9 +1254,7 @@ Set the specified segment as your default public segment. It will be returned if
 |-----------|----------------|-----------------------------------------------------------------------------------------------|
 | `id`      | number \| null | The ID of the memory segment from 0 to 99. Pass `null` to remove your default public segment. |
 
-RawMemory.setPublicSegments(ids)
-----------------------------------
-
+## RawMemory.setPublicSegments(ids)
 ```
 RawMemory.setPublicSegments([5,3]);
 ```
@@ -1443,9 +1268,7 @@ Set specified segments as public. Other users will be able to request access to 
 |-----------|-------|-----------------------------------------------------------------------------------------------------------------------------------|
 | `ids`     | array | An array of segment IDs. Each ID should be a number from 0 to 99. Subsequent calls of `setPublicSegments` override previous ones. |
 
-Constants
-=========
-
+# Constants
 All the following constant names are available in the global scope:
 
 ```
@@ -3042,18 +2865,14 @@ Object.assign(exports, {
 
 ```
 
-ConstructionSite
-================
-
+# ConstructionSite
 A site of a structure which is currently under construction. A construction site can be created using the 'Construct' button at the left of the game field or the [`Room.createConstructionSite`](https://docs.screeps.com/api/#Room.createConstructionSite) method.
 
 To build a structure on the construction site, give a worker creep some amount of energy and perform [`Creep.build`](https://docs.screeps.com/api/#Creep.build) action.
 
 You can remove enemy construction sites by moving a creep on it.
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -3062,57 +2881,38 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-id string
---------
-
+## id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-my boolean
----------
-
+## my boolean
 Whether this is your own construction site.
 
-owner object
------------
-
+## owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-progress number
---------------
-
+## progress number
 The current construction progress.
 
-progress Total number
--------------------
-
+## progress Total number
 The total construction progress needed for the structure to be built.
 
-structureType string
--------------------
-
+## structureType string
 One of the `STRUCTURE_*` constants.
 
-remove()
-----------
-
+## remove()
 Remove the construction site.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                                                 |
@@ -3120,9 +2920,7 @@ One of the following codes:
 | `OK`            | 0     | The operation has been scheduled successfully.                              |
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this construction site, and it's not in your room. |
 
-Creep
-=====
-
+# Creep
 Creeps are your units. Creeps can move, harvest energy, construct structures, attack another creeps, and perform other actions. Each creep consists of up to 50 body parts with the following possible types: ![](https://docs.screeps.com/api/img/bodyparts.png)
 
 | Body part       | Build cost | Effect per one body part                                                                                                                                                                                                                                                                                                                                                 |
@@ -3136,9 +2934,7 @@ Creeps are your units. Creeps can move, harvest energy, construct structures, at
 | `CLAIM`         | 600        | Claims a neutral room controller.Reserves a neutral room controller for 1 tick per body part.Attacks a hostile room controller downgrading its timer by 300 ticks per body parts.Attacks a neutral room controller reservation timer by 1 tick per body parts.A creep with this body part will have a reduced life time of 600 ticks and cannot be renewed.              |
 | `TOUGH`         | 10         | No effect, just additional hit points to the creep's body. Can be boosted to resist damage.                                                                                                                                                                                                                                                                              |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -3147,19 +2943,13 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-body array
----------
-
+## body array
 An array describing the creep's body. Each element contains the following properties:
 
 | parameter | type   | description                                           |
@@ -3168,81 +2958,55 @@ An array describing the creep's body. Each element contains the following proper
 | `type`    | string | One of the body part types constants.                 |
 | `hits`    | number | The remaining amount of hit points of this body part. |
 
-carry object
------------
-
+## carry object
 This property is deprecated and will be removed soon.
 
 An alias for [`Creep.store`](https://docs.screeps.com/api/#Creep.store).
 
-carryCapacity number
--------------------
-
+## carryCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`Creep.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-fatigue number
--------------
-
+## fatigue number
 The movement fatigue indicator. If it is greater than zero, the creep cannot move.
 
-hits number
-----------
-
+## hits number
 The current amount of hit points of the creep.
 
-hitsMax number
--------------
-
+## hitsMax number
 The maximum amount of hit points of the creep.
 
-id string
---------
-
+## id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-memory any
----------
-
+## memory any
 ```
 creep.memory.task = 'building';
 ```
 
 A shorthand to `Memory.creeps[creep.name]`. You can use it for quick access the creep's specific memory data object. [Learn more about memory](https://docs.screeps.com/global-objects.html#Memory-object)
 
-my boolean
----------
-
+## my boolean
 Whether it is your creep or foe.
 
-name string
-----------
-
+## name string
 Creep's name. You can choose the name while creating a new creep, and it cannot be changed later. This name is a hash key to access the creep via the [Game.creeps](https://docs.screeps.com/api/#Game.creeps) object.
 
-owner object
------------
-
+## owner object
 An object with the creep's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-saying string
-------------
-
+## saying string
 The text message that the creep was saying at the last tick.
 
-spawning boolean
----------------
-
+## spawning boolean
 Whether this creep is still being spawned.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
     goHarvest(creep);
@@ -3251,22 +3015,17 @@ if(creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this creep.
 
-ticksToLive number
------------------
-
+## ticksToLive number
 The remaining amount of game ticks after which the creep will die.
 
-attack(target)
-----------------
-
+## attack(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 if(target) {
-    if(creep.attack(target) == ERR_NOT_IN_RANGE) {
+    if(creep.attack(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
-
 ```
 
 Attack another creep, power creep, or structure in a short-ranged attack. Requires the `ATTACK` body part. If the target is inside a rampart, then the rampart is attacked instead. The target has to be at adjacent square to the creep. If the target is a creep with `ATTACK` body parts and is not inside a rampart, it will automatically hit back at the attacker.
@@ -3288,12 +3047,11 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                            |
 | `ERR_NO_BODYPART`    | \-12  | There are no `ATTACK` body parts in this creep's body. |
 
-attackController(target)
---------------------------
+## attackController(target)
 
 ```
 if(creep.room.controller && !creep.room.controller.my) {
-    if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+    if(creep.attackController(creep.room.controller) === ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.room.controller);
     }
 }
@@ -3307,7 +3065,6 @@ Decreases the controller's downgrade timer by 300 ticks per every `CLAIM` body p
 | `target`  | [StructureController](https://docs.screeps.com/api/#StructureController) | The target controller object. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                                    |
@@ -3320,13 +3077,11 @@ One of the following codes:
 | `ERR_TIRED`          | \-11  | You have to wait until the next attack is possible.            |
 | `ERR_NO_BODYPART`    | \-12  | There are not enough `CLAIM` body parts in this creep's body.  |
 
-build(target)
----------------
-
+## build(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
 if(target) {
-    if(creep.build(target) == ERR_NOT_IN_RANGE) {
+    if(creep.build(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
@@ -3340,7 +3095,6 @@ Build a structure at the target construction site using carried energy. Requires
 | `target`  | [ConstructionSite](https://docs.screeps.com/api/#ConstructionSite) | The target construction site to be built. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                                                                                                |
@@ -3353,9 +3107,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                                                                                |
 | `ERR_NO_BODYPART`          | \-12  | There are no `WORK` body parts in this creep's body.                                                                                       |
 
-cancelOrder(methodName)
--------------------------
-
+## cancelOrder(methodName)
 ```
 creep.move(LEFT);
 creep.cancelOrder('move');
@@ -3369,7 +3121,6 @@ Cancel the order given during the current game tick.
 | `methodName` | string | The name of a creep's method to be cancelled. |
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                     |
@@ -3377,12 +3128,10 @@ One of the following codes:
 | `OK`            | 0     | The operation has been cancelled successfully.  |
 | `ERR_NOT_FOUND` | \-5   | The order with the specified name is not found. |
 
-claimController(target)
--------------------------
-
+## claimController(target)
 ```
 if(creep.room.controller) {
-    if(creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+    if(creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.room.controller);
     }
 }
@@ -3396,7 +3145,6 @@ Claims a neutral controller under your control. Requires the `CLAIM` body part. 
 | `target`  | [StructureController](https://docs.screeps.com/api/#StructureController) | The target controller object. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                            |
@@ -3410,18 +3158,15 @@ One of the following codes:
 | `ERR_NO_BODYPART`    | \-12  | There are no `CLAIM` body parts in this creep's body.  |
 | `ERR_GCL_NOT_ENOUGH` | \-15  | Your Global Control Level is not enough.               |
 
-dismantle(target)
--------------------
-
+## dismantle(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_STRUCTURES,
-    {filter: {structureType: STRUCTURE_WALL}});
+    { filter: { structureType: STRUCTURE_WALL } });
 if(target) {
-    if(creep.dismantle(target) == ERR_NOT_IN_RANGE) {
+    if(creep.dismantle(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
-
 ```
 
 Dismantles any structure that can be constructed (even hostile) returning 50% of the energy spent on its repair. Requires the `WORK` body part. If the creep has an empty `CARRY` body part, the energy is put into it; otherwise it is dropped on the ground. The target has to be at adjacent square to the creep.
@@ -3431,7 +3176,6 @@ Dismantles any structure that can be constructed (even hostile) returning 50% of
 | `target`  | [Structure](https://docs.screeps.com/api/#Structure) | The target structure. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                          |
@@ -3443,9 +3187,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                          |
 | `ERR_NO_BODYPART`    | \-12  | There are no `WORK` body parts in this creep's body. |
 
-drop(resourceType, \[amount\])
---------------------------------
-
+## drop(resourceType, \[amount\])
 ```
 creep.drop(RESOURCE_ENERGY);
 ```
@@ -3464,7 +3206,6 @@ Drop this resource on the ground.
 | `amount`*optional* | number | The amount of resource units to be dropped. If omitted, all the available carried amount is used. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                             |
@@ -3475,14 +3216,11 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | The creep does not have the given amount of resources.  |
 | `ERR_INVALID_ARGS`         | \-10  | The resourceType is not a valid `RESOURCE_*` constants. |
 
-generateSafeMode(controller)
-------------------------------
-
+## generateSafeMode(controller)
 ```
-if(creep.generateSafeMode(creep.room.controller) == ERR_NOT_IN_RANGE) {
+if(creep.generateSafeMode(creep.room.controller) === ERR_NOT_IN_RANGE) {
     creep.moveTo(creep.room.controller);
 }
-
 ```
 
 Add one more available safe mode activation to a room controller. The creep has to be at adjacent square to the target room controller and have 1000 ghodium resource.
@@ -3492,7 +3230,6 @@ Add one more available safe mode activation to a room controller. The creep has 
 | `target`  | [StructureController](https://docs.screeps.com/api/#StructureController) | The target room controller. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                    |
@@ -3504,13 +3241,11 @@ One of the following codes:
 | `ERR_INVALID_TARGET`       | \-7   | The target is not a valid controller object.   |
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                    |
 
-getActiveBodyparts(type)
---------------------------
-
+## getActiveBodyparts(type)
 ```
 const target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
     filter: function(object) {
-        return object.getActiveBodyparts(ATTACK) == 0;
+        return object.getActiveBodyparts(ATTACK) === 0;
     }
 });
 if(target) {
@@ -3525,16 +3260,13 @@ Get the quantity of live body parts of the given type. Fully damaged parts do no
 | `type`    | string | A body part type, one of the following body part constants:-   `MOVE`-   `WORK`-   `CARRY`-   `ATTACK`-   `RANGED_ATTACK`-   `HEAL`-   `TOUGH` |
 
 ### Return value
-
 A number representing the quantity of body parts.
 
-harvest(target)
------------------
-
+## harvest(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
 if(target) {
-    if(creep.harvest(target) == ERR_NOT_IN_RANGE) {
+    if(creep.harvest(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
@@ -3548,7 +3280,6 @@ Harvest energy from the source or resources from minerals and deposits. Requires
 | `target`  | [Source](https://docs.screeps.com/api/#Source) \| [Mineral](https://docs.screeps.com/api/#Mineral) \| [Deposit](https://docs.screeps.com/api/#Deposit) | The object to be harvested. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                                                                                           |
@@ -3563,9 +3294,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The extractor or the deposit is still cooling down.                                                                                   |
 | `ERR_NO_BODYPART`          | \-12  | There are no `WORK` body parts in this creep's body.                                                                                  |
 
-heal(target)
---------------
-
+## heal(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
     filter: function(object) {
@@ -3573,7 +3302,7 @@ const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
     }
 });
 if(target) {
-    if(creep.heal(target) == ERR_NOT_IN_RANGE) {
+    if(creep.heal(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
@@ -3587,7 +3316,6 @@ Heal self or another creep. It will restore the target creep's damaged body part
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) \| [PowerCreep](https://docs.screeps.com/api/#PowerCreep) | The target creep object. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                          |
@@ -3599,9 +3327,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                          |
 | `ERR_NO_BODYPART`    | \-12  | There are no `HEAL` body parts in this creep's body. |
 
-move(direction)
------------------
-
+## move(direction)
 ```
 creep.move(RIGHT);
 ```
@@ -3624,7 +3350,6 @@ Move the creep one square in the specified direction. Requires the `MOVE` body p
 | `direction` | [Creep](https://docs.screeps.com/api/#Creep) \| number | A creep nearby, or one of the following constants:-   `TOP`-   `TOP_RIGHT`-   `RIGHT`-   `BOTTOM_RIGHT`-   `BOTTOM`-   `BOTTOM_LEFT`-   `LEFT`-   `TOP_LEFT` |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                        |
@@ -3637,9 +3362,7 @@ One of the following codes:
 | `ERR_TIRED`        | \-11  | The fatigue indicator of the creep is non-zero.    |
 | `ERR_NO_BODYPART`  | \-12  | There are no MOVE body parts in this creep's body. |
 
-moveByPath(path)
-------------------
-
+## moveByPath(path)
 ```
 const path = spawn.room.findPath(spawn, source);
 creep.moveByPath(path);
@@ -3658,7 +3381,6 @@ Move the creep using the specified predefined path. Requires the `MOVE` body par
 | `path`    | array \| string | A path value as returned from [`Room.findPath`](https://docs.screeps.com/api/#Room.findPath), [`RoomPosition.findPathTo`](https://docs.screeps.com/api/#RoomPosition.findPathTo), or [`PathFinder.search`](https://docs.screeps.com/api/#PathFinder.search) methods. Both array form and serialized string form are accepted. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                            |
@@ -3671,9 +3393,7 @@ One of the following codes:
 | `ERR_TIRED`        | \-11  | The fatigue indicator of the creep is non-zero.        |
 | `ERR_NO_BODYPART`  | \-12  | There are no `MOVE` body parts in this creep's body.   |
 
-moveTo(x, y, \[opts\]) (target, \[opts\])
--------------------------------------------
-
+## moveTo(x, y, \[opts\]) (target, \[opts\])
 ```
 creep.moveTo(10, 20);
 ```
@@ -3710,7 +3430,6 @@ Find the optimal path to the target within the same room and move to it. A short
 | `opts`*optional* | object | An object containing additional options:-   reusePath     number    This option enables reusing the path found along multiple game ticks. It allows to save CPU time, but can result in a slightly slower creep reaction behavior. The path is stored into the creep's memory to the `_move` property. The `reusePath` value defines the amount of ticks which the path should be reused for. The default value is 5. Increase the amount to save more CPU, decrease to make the movement more consistent. Set to 0 if you want to disable path reusing.    -   serializeMemory     boolean    If `reusePath` is enabled and this option is set to true, the path will be stored in memory in the short serialized form using [`Room.serializePath`](https://docs.screeps.com/api/#Room.serializePath). The default value is true.    -   noPathFinding     boolean    If this option is set to true, `moveTo` method will return `ERR_NOT_FOUND` if there is no memorized path to reuse. This can significantly save CPU time in some cases. The default value is false.    -   visualizePathStyle     object    Draw a line along the creep's path using [`RoomVisual.poly`](https://docs.screeps.com/api/#RoomVisual.poly). You can provide either an empty object or custom style parameters. The default style is equivalent to:    ```    {        fill: 'transparent',        stroke: '#fff',        lineStyle: 'dashed',        strokeWidth: .15,        opacity: .1    }    ```    -   Any options supported by [`Room.findPath`](https://docs.screeps.com/api/#Room.findPath) method. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                        |
@@ -3724,14 +3443,11 @@ One of the following codes:
 | `ERR_TIRED`          | \-11  | The fatigue indicator of the creep is non-zero.    |
 | `ERR_NO_BODYPART`    | \-12  | There are no MOVE body parts in this creep's body. |
 
-notifyWhenAttacked(enabled)
------------------------------
-
+## notifyWhenAttacked(enabled)
 ```
-if(creep.memory.role == 'scout') {
+if(creep.memory.role === 'scout') {
     creep.notifyWhenAttacked(false);
-}
-else {
+} else {
     creep.notifyWhenAttacked(true);
 }
 ```
@@ -3743,7 +3459,6 @@ Toggle auto notification when the creep is under attack. The notification will b
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -3753,17 +3468,14 @@ One of the following codes:
 | `ERR_BUSY`         | \-4   | The creep is still being spawned.              |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-pickup(target)
-----------------
-
+## pickup(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
 if(target) {
-    if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+    if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     }
 }
-
 ```
 
 Pick up an item (a dropped piece of energy). Requires the `CARRY` body part. The target has to be at adjacent square to the creep or at the same square.
@@ -3773,7 +3485,6 @@ Pick up an item (a dropped piece of energy). Requires the `CARRY` body part. The
 | `target`  | [Resource](https://docs.screeps.com/api/#Resource) | The target object to be picked up. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                    |
@@ -3785,9 +3496,7 @@ One of the following codes:
 | `ERR_FULL`           | \-8   | The creep cannot receive any more resource.    |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-pull(target)
---------------
-
+## pull(target)
 ```
 creep1.move(TOP);
 creep1.pull(creep2);
@@ -3796,13 +3505,14 @@ creep2.move(creep1);
 ```
 const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
     filter: function(object) {
-        return (object.getActiveBodyparts(MOVE) == 0) &&
-            object.memory.destinationId &&
-            !object.pos.isNearTo(Game.getObjectById(object.memory.destinationId));
-    }
-});
+        return (object.getActiveBodyparts(MOVE) === 0)
+            && object.memory.destinationId
+            && !object.pos.isNearTo(Game.getObjectById(object.memory.destinationId));
+        }
+    });
+
 if(target) {
-    if(creep.pull(target) == ERR_NOT_IN_RANGE) {
+    if(creep.pull(target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(target);
     } else {
         target.move(creep);
@@ -3822,7 +3532,6 @@ Help another creep to follow this creep. The fatigue generated for the target's 
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) | The target creep. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                    |
@@ -3833,9 +3542,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET` | \-7   | The target provided is invalid.                |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-rangedAttack(target)
-----------------------
-
+## rangedAttack(target)
 ```
 const targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3);
 if(targets.length > 0) {
@@ -3863,9 +3570,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                                   |
 | `ERR_NO_BODYPART`    | \-12  | There are no `RANGED_ATTACK` body parts in this creep's body. |
 
-rangedHeal(target)
---------------------
-
+## rangedHeal(target)
 ```
 const target = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
     filter: function(object) {
@@ -3876,8 +3581,7 @@ if(target) {
     creep.moveTo(target);
     if(creep.pos.isNearTo(target)) {
         creep.heal(target);
-    }
-    else {
+    } else {
         creep.rangedHeal(target);
     }
 }
@@ -3902,8 +3606,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                          |
 | `ERR_NO_BODYPART`    | \-12  | There are no `HEAL` body parts in this creep's body. |
 
-rangedMassAttack()
---------------------
+## rangedMassAttack()
 
 ```
 const targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3);
@@ -3925,8 +3628,7 @@ One of the following codes:
 | `ERR_BUSY`        | \-4   | The creep is still being spawned.                             |
 | `ERR_NO_BODYPART` | \-12  | There are no `RANGED_ATTACK` body parts in this creep's body. |
 
-repair(target)
-----------------
+## repair(target)
 
 ```
 const targets = creep.room.find(FIND_STRUCTURES, {
@@ -3962,8 +3664,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                          |
 | `ERR_NO_BODYPART`          | \-12  | There are no `WORK` body parts in this creep's body. |
 
-reserveController(target)
----------------------------
+## reserveController(target)
 
 ```
 if(creep.room.controller) {
@@ -3993,8 +3694,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                           |
 | `ERR_NO_BODYPART`    | \-12  | There are no `CLAIM` body parts in this creep's body. |
 
-say(message, \[public\])
---------------------------
+## say(message, \[public\])
 
 ```
 const hostiles = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 10);
@@ -4024,8 +3724,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this creep.           |
 | `ERR_BUSY`      | \-4   | The creep is still being spawned.              |
 
-signController(target, text)
-------------------------------
+## signController(target, text)
 
 ```
 if(creep.room.controller) {
@@ -4054,8 +3753,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET` | \-7   | The target is not a valid controller object.   |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-suicide()
------------
+## suicide()
 
 Kill the creep immediately.
 
@@ -4069,8 +3767,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this creep.           |
 | `ERR_BUSY`      | \-4   | The creep is still being spawned.              |
 
-transfer(target, resourceType, \[amount\])
---------------------------------------------
+## transfer(target, resourceType, \[amount\])
 
 ```
 if(creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -4107,8 +3804,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                            |
 | `ERR_INVALID_ARGS`         | \-10  | The resourceType is not one of the `RESOURCE_*` constants, or the amount is incorrect. |
 
-upgradeController(target)
----------------------------
+## upgradeController(target)
 
 ```
 if(creep.room.controller) {
@@ -4143,8 +3839,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                          |
 | `ERR_NO_BODYPART`          | \-12  | There are no `WORK` body parts in this creep's body.                                 |
 
-withdraw(target, resourceType, \[amount\])
---------------------------------------------
+## withdraw(target, resourceType, \[amount\])
 
 ```
 if(creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -4177,8 +3872,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                              |
 | `ERR_INVALID_ARGS`         | \-10  | The resourceType is not one of the `RESOURCE_*` constants, or the amount is incorrect.   |
 
-Deposit
-=======
+# Deposit
 
 ![](https://docs.screeps.com/api/img/deposit.png)
 
@@ -4190,8 +3884,7 @@ Learn more about deposits from [this article](https://docs.screeps.com/resources
 |--------------|--------------------------------------------------------|--|
 | **Decay**    | 50,000 ticks after appearing or last harvest operation |
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4201,23 +3894,19 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-cooldown number
---------------
+## cooldown number
 
 The amount of game ticks until the next harvest action is possible.
 
-depositType string
------------------
+## depositType string
 
 The deposit type, one of the following constants:
 
@@ -4228,28 +3917,23 @@ RESOURCE_METAL
 RESOURCE_SILICON
 ```
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-lastCooldown number
-------------------
+## lastCooldown number
 
 The cooldown of the last harvest operation on this deposit.
 
-ticksToDecay number
-------------------
+## ticksToDecay number
 
 The amount of game ticks when this deposit will disappear.
 
-Flag
-====
+# Flag
 
 A flag. Flags can be used to mark particular spots in a room. Flags are visible to their owners only. You cannot have more than 10,000 flags.
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4259,39 +3943,31 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject)
-pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-color number
------------
+## color number
 
 Flag primary color. One of the `COLOR_*` constants.
 
-memory any
----------
+## memory any
 
 A shorthand to `Memory.flags[flag.name]`. You can use it for quick access the flag's specific memory data object.
 
-name string
-----------
+## name string
 
 Flag's name. You can choose the name while creating a new flag, and it cannot be changed later. This name is a hash key to access the flag via the [Game.flags](https://docs.screeps.com/api/#Game.flags) object. The maximum name length is 100 characters.
 
-secondaryColor number
---------------------
+## secondaryColor number
 
 Flag secondary color. One of the `COLOR_*` constants.
 
-remove()
-----------
+## remove()
 
 Remove the flag.
 
@@ -4299,8 +3975,7 @@ Remove the flag.
 
 Always returns OK .
 
-setColor(color, \[secondaryColor\])
--------------------------------------
+## setColor(color, \[secondaryColor\])
 
 ```
 Game.flags.Flag1.setColor(COLOR_GREEN, COLOR_WHITE);
@@ -4322,8 +3997,7 @@ One of the following codes:
 | `OK`               | 0     | The operation has been scheduled successfully.             |
 | `ERR_INVALID_ARGS` | \-10  | `color` or `secondaryColor` is not a valid color constant. |
 
-setPosition(x,y) (pos)
-------------------------
+## setPosition(x,y) (pos)
 
 ```
 Game.flags.Flag1.setPosition(10,20);
@@ -4349,8 +4023,7 @@ One of the following codes:
 | `OK`                 | 0     | The operation has been scheduled successfully. |
 | `ERR_INVALID_TARGET` | \-7   | The target provided is invalid.                |
 
-Mineral
-=======
+# Mineral
 
 A mineral deposit. Can be harvested by creeps with a `WORK` body part using the extractor structure. Learn more about minerals from [this article](https://docs.screeps.com/resources.html).
 
@@ -4359,8 +4032,7 @@ A mineral deposit. Can be harvested by creeps with a `WORK` body part using the 
 | **Regeneration time**          | 50,000 ticks                                                                                                 |
 | **Density change probability** | `DENSITY_LOW`: 100% chance`DENSITY_MODERATE`: 5% chance`DENSITY_HIGH`: 5% chance`DENSITY_ULTRA`: 100% chance |
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4370,43 +4042,35 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-density number
--------------
+## density number
 
 The density that this mineral deposit will be refilled to once `ticksToRegeneration` reaches 0. This is one of the `DENSITY_*` constants.
 
-mineralAmount number
--------------------
+## mineralAmount number
 
 The remaining amount of resources.
 
-mineralType string
------------------
+## mineralType string
 
 The resource type, one of the `RESOURCE_*` constants.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-ticksToRegeneration number
--------------------------
+## ticksToRegeneration number
 
 The remaining time after which the deposit will be refilled.
 
-Nuke
-====
+# Nuke
 
 A nuke landing position. This object cannot be removed or modified. You can find incoming nukes in the room using the `FIND_NUKES` constant.
 
@@ -4414,8 +4078,7 @@ A nuke landing position. This object cannot be removed or modified. You can find
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Effect**       | All creeps, construction sites and dropped resources in the room are removed immediately, even inside ramparts. Damage to structures:-   10,000,000 hits at the landing position;-   5,000,000 hits to all structures in 5x5 area.Note that you can stack multiple nukes from different rooms at the same target position to increase damage.Nuke landing does not generate tombstones and ruins, and destroys all existing tombstones and ruins in the roomIf the room is in safe mode, then the safe mode is cancelled immediately, and the safe mode cooldown is reset to 0.The room controller is hit by triggering `upgradeBlocked` period, which means it is unavailable to activate safe mode again within the next 200 ticks. |
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4425,38 +4088,31 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-launchRoomName string
---------------------
+## launchRoomName string
 
 The name of the room where this nuke has been launched from.
 
-timeToLand number
-----------------
+## timeToLand number
 
 The remaining landing time.
 
-OwnedStructure
-==============
+# OwnedStructure
 
 The base prototype for a structure that has an owner. Such structures can be found using `FIND_MY_STRUCTURES` and `FIND_HOSTILE_STRUCTURES` constants.
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4466,38 +4122,31 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 
 Destroy this structure immediately.
 
@@ -4511,8 +4160,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
@@ -4520,8 +4168,7 @@ Check whether this structure can be used. If room controller level is insufficie
 
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
@@ -4539,13 +4186,11 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-my boolean
----------
+## my boolean
 
 Whether this is your own structure.
 
-owner object
------------
+## owner object
 
 An object with the structure's owner info containing the following properties:
 
@@ -4553,13 +4198,11 @@ An object with the structure's owner info containing the following properties:
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-PathFinder.CostMatrix
-=====================
+# PathFinder.CostMatrix
 
 Container for custom navigation cost data. By default `PathFinder` will only consider terrain data (plain, swamp, wall) --- if you need to route around obstacles such as buildings or creeps you must put them into a `CostMatrix`. Generally you will create your `CostMatrix` from within `roomCallback`. If a non-0 value is found in a room's CostMatrix then that value will be used instead of the default terrain cost. You should avoid using large values in your CostMatrix and terrain cost flags. For example, running `PathFinder.search` with `{ plainCost: 1, swampCost: 5 }` is faster than running it with `{plainCost: 2, swampCost: 10 }` even though your paths will be the same.
 
-constructor()
----------------
+## constructor()
 
 ```
 let costs = new PathFinder.CostMatrix;
@@ -4567,8 +4210,7 @@ let costs = new PathFinder.CostMatrix;
 
 Creates a new CostMatrix containing 0's for all positions.
 
-set(x, y, cost)
------------------
+## set(x, y, cost)
 
 ```
 let costs = new PathFinder.CostMatrix;
@@ -4584,8 +4226,7 @@ Set the cost of a position in this CostMatrix.
 | `y`       | number | Y position in the room.                                                                                                                                                |
 | `cost`    | number | Cost of this position. Must be a whole number. A cost of 0 will use the terrain cost for that tile. A cost greater than or equal to 255 will be treated as unwalkable. |
 
-get(x, y)
------------
+## get(x, y)
 
 Get the cost of a position in this CostMatrix.
 
@@ -4594,8 +4235,7 @@ Get the cost of a position in this CostMatrix.
 | `x`       | number | X position in the room. |
 | `y`       | number | Y position in the room. |
 
-clone()
----------
+## clone()
 
 Copy this CostMatrix into a new CostMatrix with the same data.
 
@@ -4603,8 +4243,7 @@ Copy this CostMatrix into a new CostMatrix with the same data.
 
 A new CostMatrix instance.
 
-serialize()
--------------
+## serialize()
 
 ```
 let costs = new PathFinder.CostMatrix;
@@ -4617,8 +4256,7 @@ Returns a compact representation of this CostMatrix which can be stored via `JSO
 
 An array of numbers. There's not much you can do with the numbers besides store them for later.
 
-PathFinder.CostMatrix.deserialize(val)
-----------------------------------------
+## PathFinder.CostMatrix.deserialize(val)
 
 ```
 let costs = PathFinder.CostMatrix.deserialize(Memory.savedMatrix)
@@ -4634,8 +4272,7 @@ Static method which deserializes a new CostMatrix using the return value of `ser
 
 Returns new `CostMatrix` instance.
 
-PowerCreep
-==========
+# PowerCreep
 
 Power Creeps are immortal "heroes" that are tied to your account and can be respawned in any `PowerSpawn` after death. You can upgrade their abilities ("powers") up to your account Global Power Level (see [`Game.gpl`](https://docs.screeps.com/api/#Game.gpl)).
 
@@ -4646,8 +4283,7 @@ Power Creeps are immortal "heroes" that are tied to your account and can be resp
 
 [Full list of available powers](https://docs.screeps.com/power.html#Powers)
 
-PowerCreep.create(name, className)
-------------------------------------
+## PowerCreep.create(name, className)
 
 ```
 PowerCreep.create('PowerCreep1', POWER_CLASS.OPERATOR);
@@ -4673,8 +4309,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | You don't have free Power Levels in your account.                                        |
 | `ERR_INVALID_ARGS`         | \-10  | The provided power creep name is exceeds the limit, or the power creep class is invalid. |
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -4684,62 +4319,51 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-carry object
------------
+## carry object
 
 This property is deprecated and will be removed soon.
 
 An alias for [`Creep.store`](https://docs.screeps.com/api/#Creep.store).
 
-carryCapacity number
--------------------
+## carryCapacity number
 
 This property is deprecated and will be removed soon.
 
 An alias for [`Creep.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-className string
----------------
+## className string
 
 The power creep's class, one of the `POWER_CLASS` constants.
 
-deleteTime number
-----------------
+## deleteTime number
 
 A timestamp when this creep is marked to be permanently deleted from the account, or undefined otherwise.
 
-hits number
-----------
+## hits number
 
 The current amount of hit points of the creep.
 
-hitsMax number
--------------
+## hitsMax number
 
 The maximum amount of hit points of the creep.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-level number
------------
+## level number
 
 The power creep's level.
 
-memory any
----------
+## memory any
 
 ```
 creep.memory.task = 'building';
@@ -4747,23 +4371,19 @@ creep.memory.task = 'building';
 
 A shorthand to `Memory.powerCreeps[creep.name]`. You can use it for quick access the creep's specific memory data object. [Learn more about memory](https://docs.screeps.com/global-objects.html#Memory-object)
 
-my boolean
----------
+## my boolean
 
 Whether it is your creep or foe.
 
-name string
-----------
+## name string
 
 Power creep's name. You can choose the name while creating a new power creep, and it cannot be changed later. This name is a hash key to access the creep via the [Game.powerCreeps](https://docs.screeps.com/api/#Game.powerCreeps) object.
 
-owner object
------------
+## owner object
 
 An object with the creep's owner info containing the following properties:
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
+## store [Store](https://docs.screeps.com/api/#Store)
 
 ```
 if(creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
@@ -4777,8 +4397,7 @@ A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of t
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-powers object
-------------
+## powers object
 
 Available powers, an object with power ID as a key, and the following properties:
 
@@ -4787,18 +4406,15 @@ Available powers, an object with power ID as a key, and the following properties
 | `level`    | number | Current level of the power.                                                            |
 | `cooldown` | number | Cooldown ticks remaining, or undefined if the power creep is not spawned in the world. |
 
-saying string
-------------
+## saying string
 
 The text message that the creep was saying at the last tick.
 
-shard string
------------
+## shard string
 
 The name of the shard where the power creep is spawned, or undefined.
 
-spawnCooldownTime number
------------------------
+## spawnCooldownTime number
 
 ```
 if(!(Game.powerCreeps['PowerCreep1'].spawnCooldownTime > Date.now())) {
@@ -4808,13 +4424,11 @@ if(!(Game.powerCreeps['PowerCreep1'].spawnCooldownTime > Date.now())) {
 
 The timestamp when spawning or deleting this creep will become available. Undefined if the power creep is spawned in the world.
 
-ticksToLive number
------------------
+## ticksToLive number
 
 The remaining amount of game ticks after which the creep will die and become unspawned. Undefined if the creep is not spawned in the world.
 
-cancelOrder(methodName)
--------------------------
+## cancelOrder(methodName)
 
 ```
 creep.move(LEFT);
@@ -4839,8 +4453,7 @@ One of the following codes:
 | `ERR_BUSY`      | \-4   | The power creep is not spawned in the world.    |
 | `ERR_NOT_FOUND` | \-5   | The order with the specified name is not found. |
 
-delete(\[cancel\])
---------------------
+## delete(\[cancel\])
 
 ```
 Game.powerCreeps['PowerCreep1'].delete();
@@ -4862,8 +4475,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of the creep.            |
 | `ERR_BUSY`      | \-4   | The power creep is spawned in the world.       |
 
-drop(resourceType, \[amount\])
---------------------------------
+## drop(resourceType, \[amount\])
 
 ```
 creep.drop(RESOURCE_ENERGY);
@@ -4898,8 +4510,7 @@ One of the following codes:
 Game.powerCreeps['PowerCreep1'].usePower(PWR_GENERATE_OPS);
 ```
 
-enableRoom(controller)
-------------------------
+## enableRoom(controller)
 
 ```
 powerCreep.enableRoom(powerCreep.room.controller);
@@ -4922,8 +4533,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET` | \-7   | The target is not a controller structure.      |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-move(direction)
------------------
+## move(direction)
 
 ```
 creep.move(RIGHT);
@@ -4959,8 +4569,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS` | \-10  | The provided direction is incorrect.            |
 | `ERR_TIRED`        | \-11  | The fatigue indicator of the creep is non-zero. |
 
-moveByPath(path)
-------------------
+## moveByPath(path)
 
 ```
 const path = spawn.room.findPath(spawn, source);
@@ -4992,8 +4601,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS` | \-10  | `path` is not a valid path array.                      |
 | `ERR_TIRED`        | \-11  | The fatigue indicator of the creep is non-zero.        |
 
-moveTo(x, y, \[opts\]) (target, \[opts\])
--------------------------------------------
+## moveTo(x, y, \[opts\]) (target, \[opts\])
 
 ```
 creep.moveTo(10, 20);
@@ -5044,8 +4652,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET` | \-7   | The target provided is invalid.                 |
 | `ERR_TIRED`          | \-11  | The fatigue indicator of the creep is non-zero. |
 
-notifyWhenAttacked(enabled)
------------------------------
+## notifyWhenAttacked(enabled)
 
 ```
 Game.powerCreeps['PC1'].notifyWhenAttacked(true);
@@ -5068,8 +4675,7 @@ One of the following codes:
 | `ERR_BUSY`         | \-4   | The power creep is not spawned in the world.   |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-pickup(target)
-----------------
+## pickup(target)
 
 ```
 const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
@@ -5100,8 +4706,7 @@ One of the following codes:
 | `ERR_FULL`           | \-8   | The creep cannot receive any more resource.    |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-rename(name)
---------------
+## rename(name)
 
 ```
 Game.powerCreeps['PC1'].rename('PC1X');
@@ -5124,8 +4729,7 @@ One of the following codes:
 | `ERR_NAME_EXISTS` | \-3   | A power creep with the specified name already exists. |
 | `ERR_BUSY`        | \-4   | The power creep is spawned in the world.              |
 
-renew(target)
----------------
+## renew(target)
 
 ```
 let powerBank = Game.getObjectById('XXX');
@@ -5151,16 +4755,14 @@ One of the following codes:
 | `ERR_INVALID_TARGET` | \-7   | The target is not a valid power bank object.   |
 | `ERR_NOT_IN_RANGE`   | \-9   | The target is too far away.                    |
 
-say(message, \[public\])
---------------------------
+## say(message, \[public\])
 
 ```
 const hostiles = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 10);
 if(hostiles.length > 0) {
     creep.say('OMG!😨');
     creep.moveTo(Game.spawns['Spawn1']);
-}
-else {
+} else {
     doWork(creep);
 }
 ```
@@ -5182,8 +4784,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this creep.           |
 | `ERR_BUSY`      | \-4   | The power creep is not spawned in the world.   |
 
-spawn(powerSpawn)
--------------------
+## spawn(powerSpawn)
 
 ```
 Game.powerCreeps['PowerCreep1'].spawn(Game.getObjectById('XXX'));
@@ -5208,8 +4809,7 @@ One of the following codes:
 | `ERR_TIRED`          | \-11  | The power creep cannot be spawned because of the cooldown. |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Room Controller Level insufficient to use the spawn.       |
 
-suicide()
------------
+## suicide()
 
 Kill the power creep immediately. It will not be destroyed permanently, but will become unspawned, so that you can [`spawn`](https://docs.screeps.com/api/#PowerCreep.spawn) it again.
 
@@ -5223,8 +4823,7 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this creep.           |
 | `ERR_BUSY`      | \-4   | The power creep is not spawned in the world.   |
 
-transfer(target, resourceType, \[amount\])
---------------------------------------------
+## transfer(target, resourceType, \[amount\])
 
 ```
 if(creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -5261,8 +4860,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                            |
 | `ERR_INVALID_ARGS`         | \-10  | The resourceType is not one of the `RESOURCE_*` constants, or the amount is incorrect. |
 
-upgrade(power)
-----------------
+## upgrade(power)
 
 ```
 Game.powerCreeps['PowerCreep1'].upgrade(PWR_GENERATE_OPS);
@@ -5286,8 +4884,7 @@ One of the following codes:
 | `ERR_FULL`                 | \-8   | The specified power cannot be upgraded on this creep's level, or the creep reached the maximum level. |
 | `ERR_INVALID_ARGS`         | \-10  | The specified power ID is not valid.                                                                  |
 
-usePower(power, \[target\])
------------------------------
+## usePower(power, \[target\])
 
 ```
 Game.powerCreeps['PowerCreep1'].usePower(PWR_GENERATE_OPS);
@@ -5322,8 +4919,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The power ability is still on cooldown.                   |
 | `ERR_NO_BODYPART`          | \-12  | The creep doesn't have the specified power ability.       |
 
-withdraw(target, resourceType, \[amount\])
---------------------------------------------
+## withdraw(target, resourceType, \[amount\])
 
 ```
 if(creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -5356,13 +4952,11 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The target is too far away.                                                              |
 | `ERR_INVALID_ARGS`         | \-10  | The resourceType is not one of the `RESOURCE_*` constants, or the amount is incorrect.   |
 
-Resource
-========
+# Resource
 
 A dropped piece of resource. It will decay after a while if not picked up. Dropped resource pile decays for `ceil(amount/1000)` units per tick.
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -5372,53 +4966,43 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-amount number
-------------
+## amount number
 
 The amount of resource units containing.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-resourceType string
-------------------
+## resourceType string
 
 One of the `RESOURCE_*` constants.
 
-Room
-====
+# Room
 
 An object representing the room in which your units and structures are in. It can be used to look around, find paths, etc. Every `RoomObject` in the room contains its linked `Room` instance in the `room` property.
 
-controller[StructureController](https://docs.screeps.com/api/#StructureController)
-----------------------------------------------------------------------------------
+## controller[StructureController](https://docs.screeps.com/api/#StructureController)
 
 The Controller structure of this room, if present, otherwise undefined.
 
-energyAvailable number
----------------------
+## energyAvailable number
 
 Total amount of energy available in all spawns and extensions in the room.
 
-energyCapacityAvailable number
------------------------------
+## energyCapacityAvailable number
 
 Total amount of `energyCapacity` of all spawns and extensions in the room.
 
-memory any
----------
+## memory any
 
 ```
 room.memory.stage = 2;
@@ -5426,28 +5010,23 @@ room.memory.stage = 2;
 
 A shorthand to `Memory.rooms[room.name]`. You can use it for quick access the room's specific memory data object. [Learn more about memory](https://docs.screeps.com/global-objects.html#Memory-object)
 
-name string
-----------
+## name string
 
 The name of the room.
 
-storage[StructureStorage](https://docs.screeps.com/api/#StructureStorage)
--------------------------------------------------------------------------
+## storage[StructureStorage](https://docs.screeps.com/api/#StructureStorage)
 
 The Storage structure of this room, if present, otherwise undefined.
 
-terminal[StructureTerminal](https://docs.screeps.com/api/#StructureTerminal)
-----------------------------------------------------------------------------
+## terminal[StructureTerminal](https://docs.screeps.com/api/#StructureTerminal)
 
 The Terminal structure of this room, if present, otherwise undefined.
 
-visual[RoomVisual](https://docs.screeps.com/api/#RoomVisual)
-------------------------------------------------------------
+## visual[RoomVisual](https://docs.screeps.com/api/#RoomVisual)
 
 A [RoomVisual](https://docs.screeps.com/api/#RoomVisual) object for this room. You can use this object to draw simple shapes (lines, circles, text labels) in the room.
 
-Room.serializePath(path)
---------------------------
+## Room.serializePath(path)
 
 ```
 const path = spawn.pos.findPathTo(source);
@@ -5465,8 +5044,7 @@ Serialize a path array into a short string representation, which is suitable to 
 
 A serialized string form of the given path.
 
-Room.deserializePath(path)
-----------------------------
+## Room.deserializePath(path)
 
 ```
 const path = Room.deserializePath(Memory.path);
@@ -5483,8 +5061,7 @@ Deserialize a short string path representation into an array form.
 
 A path array.
 
-createConstructionSite(x, y, structureType, \[name\]) (pos, structureType, \[name\])
---------------------------------------------------------------------------------------
+## createConstructionSite(x, y, structureType, \[name\]) (pos, structureType, \[name\])
 
 ```
 Game.rooms.sim.createConstructionSite(10, 15, STRUCTURE_ROAD);
@@ -5517,8 +5094,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`   | \-10  | The location is incorrect.                                                                        |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Room Controller Level insufficient. [Learn more](https://docs.screeps.com/control.html)           |
 
-createFlag(x, y, \[name\], \[color\], \[secondaryColor\]) (pos, \[name\], \[color\], \[secondaryColor\])
-----------------------------------------------------------------------------------------------------------
+## createFlag(x, y, \[name\], \[color\], \[secondaryColor\]) (pos, \[name\], \[color\], \[secondaryColor\])
 
 ```
 Game.rooms.sim.createFlag(5, 12, 'Flag1');
@@ -5545,8 +5121,7 @@ The name of a new flag, or one of the following error codes:
 | `ERR_FULL`         | \-8   | You have too many flags. The maximum number of flags per player is 10000. |
 | `ERR_INVALID_ARGS` | \-10  | The location or the name or the color constant is incorrect.              |
 
-find(type, \[opts\])
-----------------------
+## find(type, \[opts\])
 
 ```
 const targets = creep.room.find(FIND_DROPPED_RESOURCES);
@@ -5610,8 +5185,7 @@ An array with the objects found.
 | `FIND_TOMBSTONES`                 | Tombstone        | All tombstones.                                                        |
 | `FIND_RUINS`                      | Ruin             | All ruins                                                              |
 
-findExitTo(room)
-------------------
+## findExitTo(room)
 
 ```
 const exitDir = creep.room.findExitTo(anotherCreep.room);
@@ -5645,8 +5219,7 @@ Or one of the following error codes:
 | `ERR_NO_PATH`      | \-2   | Path can not be found.     |
 | `ERR_INVALID_ARGS` | \-10  | The location is incorrect. |
 
-findPath(fromPos, toPos, \[opts\])
-------------------------------------
+## findPath(fromPos, toPos, \[opts\])
 
 ```
 const path = creep.room.findPath(creep.pos, targetPos);
@@ -5701,8 +5274,7 @@ An array with path steps in the following format:
 ]
 ```
 
-getEventLog(\[raw\])
-----------------------
+## getEventLog(\[raw\])
 
 ```
 // track events performed by a particular creep
@@ -5756,8 +5328,7 @@ The `data` property is different for each event type according to the following 
 | `EVENT_EXIT`               | A creep moved to another room.-   `room` \- the name of the target room-   `x`, `y` \- the coordinates in another room where the creep has appeared                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `EVENT_TRANSFER`           | A link performed [`transferEnergy`](https://docs.screeps.com/api/#StructureLink.transferEnergy) or a creep performed [`transfer`](https://docs.screeps.com/api/#Creep.transfer) or [`withdraw`](https://docs.screeps.com/api/#Creep.withdraw).-   `targetId` \- the target object ID-   `resourceType` \- the type of resource transferred-   `amount` \- the amount of resource transferred                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-getPositionAt(x, y)
----------------------
+## getPositionAt(x, y)
 
 ```
 const pos = Game.rooms.sim.getPositionAt(5,12);
@@ -5775,8 +5346,7 @@ Creates a [RoomPosition](https://docs.screeps.com/api/#RoomPosition) object at t
 
 A [RoomPosition](https://docs.screeps.com/api/#RoomPosition) object or null if it cannot be obtained.
 
-getTerrain()
---------------
+## getTerrain()
 
 ```
 const terrain = Game.rooms['W1N1'].getTerrain();
@@ -5796,8 +5366,7 @@ Get a [`Room.Terrain`](https://docs.screeps.com/api/#Room-Terrain) object which 
 
 Returns new [`Room.Terrain`](https://docs.screeps.com/api/#Room-Terrain) object.
 
-lookAt(x, y) (target)
------------------------
+## lookAt(x, y) (target)
 
 ```
 const look = creep.room.lookAt(target);
@@ -5830,8 +5399,7 @@ An array with objects at the specified position in the following format:
 ]
 ```
 
-lookAtArea(top, left, bottom, right, \[asArray\])
----------------------------------------------------
+## lookAtArea(top, left, bottom, right, \[asArray\])
 
 ```
 const look = creep.room.lookAtArea(10,5,11,7);
@@ -5885,8 +5453,7 @@ If `asArray` is set to true, the method returns an array in the following format
 ]
 ```
 
-lookForAt(type, x, y) (type, target)
---------------------------------------
+## lookForAt(type, x, y) (type, target)
 
 ```
 const found = creep.room.lookForAt(LOOK_CREEPS, target);
@@ -5908,8 +5475,7 @@ Get an object with the given type at the specified room position.
 
 An array of objects of the given type at the specified position if found.
 
-lookForAtArea(type, top, left, bottom, right, \[asArray\])
-------------------------------------------------------------
+## lookForAtArea(type, top, left, bottom, right, \[asArray\])
 
 ```
 const look = creep.room.lookForAtArea(LOOK_STRUCTURES,10,5,11,7);
@@ -5957,15 +5523,13 @@ If `asArray` is set to true, the method returns an array in the following format
 ]
 ```
 
-Room.Terrain
-============
+# Room.Terrain
 
 An object which provides fast access to room terrain data. These objects can be constructed for any room in the world even if you have no access to it.
 
 Technically every `Room.Terrain` object is a very lightweight adapter to underlying static terrain buffers with corresponding minimal accessors.
 
-constructor(roomName)
------------------------
+## constructor(roomName)
 
 ```
 const terrain = new Room.Terrain("E2S7");
@@ -5980,8 +5544,7 @@ Creates a new `Terrain` of room by its name. `Terrain` objects can be constructe
 |------------|--------|----------------|
 | `roomName` | string | The room name. |
 
-get(x, y)
------------
+## get(x, y)
 
 ```
 switch(terrain.get(10,15)) {
@@ -6042,8 +5605,7 @@ One of the following integer values:
 | 1     | `TERRAIN_MASK_WALL`                                               | terrain is `wall`  |
 | 2     | `TERRAIN_MASK_SWAMP`                                              | terrain is `swamp` |
 
-getRawBuffer(\[destinationArray\])
-------------------------------------
+## getRawBuffer(\[destinationArray\])
 
 ```
 function myPrintRawTerain(raw) {
@@ -6107,13 +5669,11 @@ If `destinationArray` is specified, function returns reference to this filled `d
 |--------------------|-------|------------------------------------------|
 | `ERR_INVALID_ARGS` | \-10  | `destinationArray` type is incompatible. |
 
-RoomObject
-==========
+# RoomObject
 
 Any object with a position in a room. Almost all game objects prototypes are derived from `RoomObject`.
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -6123,23 +5683,19 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
--------------------------------------------------------------
+## pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-room [Room](https://docs.screeps.com/api/#Room)
-----------------------------------------------
+## room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-RoomPosition
-============
+# RoomPosition
 
 An object representing the specified position in the room. Every `RoomObject` in the room contains `RoomPosition` as the `pos` property. The position object of a custom location can be obtained using the [`Room.getPositionAt`](https://docs.screeps.com/api/#Room.getPositionAt) method or using the constructor.
 
-constructor(x, y, roomName)
------------------------------
+## constructor(x, y, roomName)
 
 ```
 const pos = new RoomPosition(10, 25, 'sim');
@@ -6154,23 +5710,19 @@ You can create new `RoomPosition` object using its constructor.
 | `y`        | number | Y position in the room. |
 | `roomName` | string | The room name.          |
 
-roomName string
---------------
+## roomName string
 
 The name of the room.
 
-x number
--------
+## x number
 
 X position in the room.
 
-y number
--------
+## y number
 
 Y position in the room.
 
-createConstructionSite(structureType, \[name\])
--------------------------------------------------
+## createConstructionSite(structureType, \[name\])
 
 ```
 Game.flags['Flag1'].pos.createConstructionSite(STRUCTURE_ROAD);
@@ -6198,8 +5750,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`   | \-10  | The location is incorrect.                                                                        |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Room Controller Level insufficient. [Learn more](https://docs.screeps.com/control.html)           |
 
-createFlag(\[name\], \[color\], \[secondaryColor\])
------------------------------------------------------
+## createFlag(\[name\], \[color\], \[secondaryColor\])
 
 ```
 creep.pos.createFlag('Flag1');
@@ -6222,8 +5773,7 @@ The name of a new flag, or one of the following error codes:
 | `ERR_NAME_EXISTS`  | \-3   | There is a flag with the same name already.      |
 | `ERR_INVALID_ARGS` | \-10  | The location or the color constant is incorrect. |
 
-findClosestByPath(type, \[opts\]) (objects, \[opts\])
--------------------------------------------------------
+## findClosestByPath(type, \[opts\]) (objects, \[opts\])
 
 ```
 const target = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
@@ -6266,8 +5816,7 @@ Find an object with the shortest path from the given position. Uses [Jump Point 
 
 The closest object if found, null otherwise.
 
-findClosestByRange(type, \[opts\]) (objects, \[opts\])
---------------------------------------------------------
+## findClosestByRange(type, \[opts\]) (objects, \[opts\])
 
 ```
 const target = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
@@ -6306,8 +5855,7 @@ Find an object with the shortest linear distance from the given position.
 
 The closest object if found, null otherwise.
 
-findInRange(type, range, \[opts\]) (objects, range, \[opts\])
----------------------------------------------------------------
+## findInRange(type, range, \[opts\]) (objects, range, \[opts\])
 
 ```
 const targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3);
@@ -6337,8 +5885,7 @@ Find all objects in the specified linear range.
 
 An array with the objects found.
 
-findPathTo(x, y, \[opts\]) (target, \[opts\])
------------------------------------------------
+## findPathTo(x, y, \[opts\]) (target, \[opts\])
 
 ```
 const path = creep.pos.findPathTo(target);
@@ -6377,8 +5924,7 @@ An array with path steps in the following format:
 ]
 ```
 
-getDirectionTo(x,y) (target)
-------------------------------
+## getDirectionTo(x,y) (target)
 
 ```
 const direction = creep.pos.getDirectionTo(target);
@@ -6397,8 +5943,7 @@ Get linear direction to the specified position.
 
 A number representing one of the direction constants.
 
-getRangeTo(x,y) (target)
---------------------------
+## getRangeTo(x,y) (target)
 
 ```
 const range = creep.pos.getRangeTo(target);
@@ -6419,8 +5964,7 @@ Get linear range to the specified position.
 
 A number of squares to the given position.
 
-inRangeTo(x, y, range) (target, range)
-----------------------------------------
+## inRangeTo(x, y, range) (target, range)
 
 ```
 if(creep.pos.inRangeTo(target, 3)) {
@@ -6441,8 +5985,7 @@ Check whether this position is in the given range of another position.
 
 A boolean value.
 
-isEqualTo(x,y) (target)
--------------------------
+## isEqualTo(x,y) (target)
 
 ```
 if(creep.pos.isEqualTo(10,25)) {
@@ -6467,8 +6010,7 @@ Check whether this position is the same as the specified position.
 
 A boolean value.
 
-isNearTo(x,y) (target)
-------------------------
+## isNearTo(x,y) (target)
 
 ```
 if(creep.pos.isNearTo(target)) {
@@ -6488,8 +6030,7 @@ Check whether this position is on the adjacent square to the specified position.
 
 A boolean value.
 
-look()
---------
+## look()
 
 ```
 const look = Game.flags.Flag1.pos.look();
@@ -6516,8 +6057,7 @@ An array with objects at the specified position in the following format:
 ]
 ```
 
-lookFor(type)
----------------
+## lookFor(type)
 
 ```
 const found = Game.flags.Flag1.pos.lookFor(LOOK_CREEPS);
@@ -6536,8 +6076,7 @@ Get an object with the given type at the specified room position.
 
 An array of objects of the given type at the specified position if found.
 
-RoomVisual
-==========
+# RoomVisual
 
 ![](https://docs.screeps.com/api/img/visual.png)
 
@@ -6547,8 +6086,7 @@ Room visuals are not stored in the database, their only purpose is to display so
 
 All draw coordinates are measured in game coordinates and centered to tile centers, i.e. (10,10) will point to the center of the creep at `x:10; y:10` position. Fractional coordinates are allowed.
 
-constructor(\[roomName\])
----------------------------
+## constructor(\[roomName\])
 
 ```
 Game.rooms['W10N10'].visual.circle(10,20).line(0,0,10,20);
@@ -6566,13 +6104,11 @@ You can directly create new `RoomVisual` object in any room, even if it's invisi
 |----------------------|--------|----------------------------------------------------------------------------------|
 | `roomName`*optional* | string | The room name. If undefined, visuals will be posted to all rooms simultaneously. |
 
-roomName string
---------------
+## roomName string
 
 The name of the room.
 
-line(x1, y1, x2, y2, \[style\]) (pos1, pos2, \[style\])
----------------------------------------------------------
+## line(x1, y1, x2, y2, \[style\]) (pos1, pos2, \[style\])
 
 ```
 new RoomVisual('W1N1').line(10,15, 20,20);
@@ -6598,8 +6134,7 @@ Draw a line.
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-circle(x, y, \[style\]) (pos, \[style\])
-------------------------------------------
+## circle(x, y, \[style\]) (pos, \[style\])
 
 ```
 new RoomVisual('W1N1').circle(10,15);
@@ -6622,8 +6157,7 @@ Draw a circle.
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-rect(x, y, width, height, \[style\]) (topLeftPos, width, height, \[style\])
------------------------------------------------------------------------------
+## rect(x, y, width, height, \[style\]) (topLeftPos, width, height, \[style\])
 
 ```
 // 9x9 area from (2,2) to (10,10)
@@ -6651,8 +6185,7 @@ Draw a rectangle.
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-poly(points, \[style\])
--------------------------
+## poly(points, \[style\])
 
 ```
 const points = [];
@@ -6679,8 +6212,7 @@ Draw a polyline.
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-text(text, x, y, \[style\]) (text, pos, \[style\])
-----------------------------------------------------
+## text(text, x, y, \[style\]) (text, pos, \[style\])
 
 ```
 new RoomVisual('W1N1').text("Target💥", 10, 15, {color: 'green', font: 0.8});
@@ -6700,8 +6232,7 @@ Draw a text label. You can use any valid Unicode characters, including [emoji](h
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-clear()
----------
+## clear()
 
 ```
 new RoomVisual('W1N1').clear();
@@ -6713,8 +6244,7 @@ Remove all visuals from the room.
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-getSize()
------------
+## getSize()
 
 ```
 if(creep.room.visual.getSize() >= 512000) {
@@ -6728,8 +6258,7 @@ Get the stored size of all visuals added in the room in the current tick. It mus
 
 The size of the visuals in bytes.
 
-export()
-----------
+## export()
 
 ```
 Memory.RoomVisualData['E2S7'] = Game.rooms.E2S7.visual.export();
@@ -6741,8 +6270,7 @@ Returns a compact representation of all visuals added in the room in the current
 
 A string with visuals data. There's not much you can do with the string besides store them for later.
 
-import(val)
--------------
+## import(val)
 
 ```
 if(Memory.RoomVisualData['E2S7']) {
@@ -6760,8 +6288,7 @@ Add previously exported (with [RoomVisual.export](https://docs.screeps.com/api/#
 
 The `RoomVisual` object itself, so that you can chain calls.
 
-Ruin
-====
+# Ruin
 
 ![](https://docs.screeps.com/api/img/ruin.png)
 
@@ -6770,8 +6297,7 @@ A destroyed structure. This is a walkable object.
 | **Decay** | 500 ticks except some special cases |
 |-----------|-------------------------------------|
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -6781,43 +6307,35 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-destroyTime number
------------------
+## destroyTime number
 
 The time when the structure has been destroyed.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
+## store [Store](https://docs.screeps.com/api/#Store)
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains resources of this structure.
 
-structure[Structure](https://docs.screeps.com/api/#Structure) | [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure)
-------------------------------------------------------------------------------------------------------------------------------
+## structure[Structure](https://docs.screeps.com/api/#Structure) | [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure)
 
 An object containing basic data of the destroyed structure.
 
-ticksToDecay number
-------------------
+## ticksToDecay number
 
 The amount of game ticks before this ruin decays.
 
-Source
-======
+# Source
 
 An energy source object. Can be harvested by creeps with a `WORK` body part.
 
@@ -6825,8 +6343,7 @@ An energy source object. Can be harvested by creeps with a `WORK` body part.
 |-------------------------|---------------------------------------------------------------------------------|
 | **Energy regeneration** | Every 300 game ticks                                                            |
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -6836,57 +6353,46 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-energy number
-------------
+## energy number
 
 The remaining amount of energy.
 
-energyCapacity number
---------------------
+## energyCapacity number
 
 The total amount of energy in the source.
 
-id string
---------
+## id string
 
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-ticksToRegeneration number
--------------------------
+## ticksToRegeneration number
 
 The remaining time after which the source will be refilled.
 
-Store
-=====
+# Store
 
 An object that can contain resources in its cargo.
 
 There are two types of stores in the game: general purpose stores and limited stores.
-
 -   General purpose stores can contain any resource within its capacity (e.g. creeps, containers, storages, terminals).
-
 -   Limited stores can contain only a few types of resources needed for that particular object (e.g. spawns, extensions, labs, nukers).
 
 The `Store` prototype is the same for both types of stores, but they have different behavior depending on the `resource` argument in its methods.
-
 You can get specific resources from the store by addressing them as object properties:
 
 ```
 console.log(creep.store[RESOURCE_ENERGY]);
 ```
 
-getCapacity(\[resource\])
----------------------------
+## getCapacity(\[resource\])
 
 ```
 if(creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
@@ -6904,8 +6410,7 @@ Returns capacity of this store for the specified resource. For a general purpose
 
 Returns capacity number, or `null` in case of an invalid `resource` for this store type.
 
-getFreeCapacity(\[resource\])
--------------------------------
+## getFreeCapacity(\[resource\])
 
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
@@ -6923,8 +6428,7 @@ Returns free capacity for the store. For a limited store, it returns the capacit
 
 Returns available capacity number, or `null` in case of an invalid `resource` for this store type.
 
-getUsedCapacity(\[resource\])
--------------------------------
+## getUsedCapacity(\[resource\])
 
 ```
 if(Game.rooms['W1N1'].terminal.store.getUsedCapacity() == 0) {
@@ -6942,13 +6446,11 @@ Returns the capacity used by the specified resource. For a general purpose store
 
 Returns used capacity number, or `null` in case of a not valid `resource` for this store type.
 
-Structure
-=========
+# Structure
 
 The base prototype object of all structures.
 
-effects array
-------------
+## effects array
 
 Applied effects, an array of objects with the following properties:
 
@@ -6958,43 +6460,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-hits number
-----------
-
+## hits number
 The current amount of hit points of the structure.
 
-hitsMax number
--------------
-
+## hitsMax number
 The total amount of hit points of the structure.
 
-id string
---------
-
+## id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-structureType string
--------------------
-
+## structureType string
 One of the `STRUCTURE_*` constants.
 
-destroy()
------------
-
+## destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                                         |
@@ -7003,18 +6490,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure, and it's not in your room. |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                                     |
 
-isActive()
-------------
-
+## isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-notifyWhenAttacked(enabled)
------------------------------
-
+## notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7022,7 +6504,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7031,9 +6512,7 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-StructureContainer
-==================
-
+# StructureContainer
 ![](https://docs.screeps.com/api/img/container.png)
 
 A small container that can be used to store resources. This is a walkable structure. All dropped resources automatically goes to the container at the same tile.
@@ -7046,9 +6525,7 @@ A small container that can be used to store resources. This is a walkable struct
 | **Hits**               | 250,000                                                                                    |
 | **Decay**              | Loses 5,000 hits every 500 ticks in an owned room, and every 100 ticks in an unowned room. |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7057,43 +6534,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7102,18 +6564,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7121,7 +6578,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7130,9 +6586,7 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 const containersWithEnergy = room.find(FIND_STRUCTURES, {
     filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
@@ -7142,25 +6596,17 @@ const containersWithEnergy = room.find(FIND_STRUCTURES, {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-storeCapacity number
--------------------
-
+## storeCapacity number
 This property is deprecated and will be removed soon.
-
 An alias for [`.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks when this container will lose some hit points.
 
-StructureController
-===================
-
+# StructureController
 ![](https://docs.screeps.com/api/img/controller.png)
 
 Claim this structure to take control over the room. The controller structure cannot be damaged or destroyed.
-
 It can be addressed by [`Room.controller`](https://docs.screeps.com/api/#Room.controller) property.
 
 | **Level** | Upgrade to next level | Downgrade timer |
@@ -7182,9 +6628,7 @@ It can be addressed by [`Room.controller`](https://docs.screeps.com/api/#Room.co
 | **Cooldown**   | 50,000 ticks (no cooldown in Novice Areas, also no cooldown for initial Safe Mode in your first room)                                                                                                                                                                                                                                                                                                                                             |
 | **Generation** | -   Each new controller level generates one available activation-   Can be generated by creeps using 1,000 ghodium-   All available activations are reset if the controller is downgraded                                                                                                                                                                                                                                                         |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7193,43 +6637,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7238,18 +6667,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7257,7 +6681,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7266,43 +6689,29 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-isPowerEnabled boolean
----------------------
-
+## isPowerEnabled boolean
 Whether using power is enabled in this room. Use [`PowerCreep.enableRoom`](https://docs.screeps.com/api/#PowerCreep.enableRoom) to turn powers on.
 
-level number
------------
-
+## level number
 Current controller level, from 0 to 8.
 
-progress number
---------------
-
+## progress number
 The current progress of upgrading the controller to the next level.
 
-progressTotal number
--------------------
-
+## progressTotal number
 The progress needed to reach the next level.
 
-reservation object
------------------
-
+## reservation object
 An object with the controller reservation info if present:
 
 | parameter    | type   | description                                             |
@@ -7310,24 +6719,16 @@ An object with the controller reservation info if present:
 | `username`   | string | The name of a player who reserved this controller.      |
 | `ticksToEnd` | number | The amount of game ticks when the reservation will end. |
 
-safeMode number
---------------
-
+## safeMode number
 How many ticks of safe mode remaining, or undefined.
 
-safeModeAvailable number
------------------------
-
+## safeModeAvailable number
 Safe mode activations available to use.
 
-safeModeCooldown number
-----------------------
-
+## safeModeCooldown number
 During this period in ticks new safe mode activations will be blocked, undefined if cooldown is inactive.
 
-sign object
-----------
-
+## sign object
 An object with the controller sign info if present:
 
 | parameter  | type   | description                                      |
@@ -7337,27 +6738,19 @@ An object with the controller sign info if present:
 | `time`     | number | The sign time in game ticks.                     |
 | `datetime` | Date   | The sign real date.                              |
 
-ticksToDowngrade number
-----------------------
-
+## ticksToDowngrade number
 The amount of game ticks when this controller will lose one level. This timer is set to 50% on level upgrade or downgrade, and it can be increased by using `[Creep.upgradeController](https://docs.screeps.com/api/#Creep.upgradeController)`. Must be full to upgrade the controller to the next level.
 
-upgradeBlocked number
---------------------
-
+## upgradeBlocked number
 The amount of game ticks while this controller cannot be upgraded due to attack. Safe mode is also unavailable during this period.
 
-activateSafeMode()
---------------------
-
+## activateSafeMode()
 ```
 room.controller.activateSafeMode();
 ```
-
 Activate safe mode if available.
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                                                                                                           |
@@ -7368,9 +6761,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | There is no safe mode activations available.                                                                                                          |
 | `ERR_TIRED`                | \-11  | The previous safe mode is still cooling down, or the controller is `upgradeBlocked`, or the controller is downgraded for 50% plus 5000 ticks or more. |
 
-unclaim()
------------
-
+## unclaim()
 ```
 room.controller.unclaim();
 ```
@@ -7386,9 +6777,7 @@ One of the following codes:
 | `OK`            | 0     | The operation has been scheduled successfully. |
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this controller.      |
 
-StructureExtension
-==================
-
+# StructureExtension
 ![](https://docs.screeps.com/api/img/spawn.png)
 
 Contains energy which can be spent on spawning bigger creeps. Extensions can be placed anywhere in the room, any spawns will be able to use them regardless of distance.
@@ -7406,9 +6795,7 @@ Contains energy which can be spent on spawning bigger creeps. Extensions can be 
 | **Cost**             | 3,000                        |
 | **Hits**             | 1,000                        |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7417,43 +6804,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7462,18 +6834,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7481,7 +6848,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7490,39 +6856,27 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
-
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
-
 The total amount of energy the extension can contain.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -7531,11 +6885,8 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-StructureExtractor
-==================
-
+# StructureExtractor
 ![](https://docs.screeps.com/api/img/extractor.png)
-
 Allows to harvest a mineral deposit. Learn more about minerals from [this article](https://docs.screeps.com/resources.html).
 
 | **Controller level** | 6                                |
@@ -7544,9 +6895,7 @@ Allows to harvest a mineral deposit. Learn more about minerals from [this articl
 | **Hits**             | 500                              |
 | **Cooldown**         | 5 ticks on each `harvest` action |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7555,43 +6904,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7600,18 +6934,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7619,7 +6948,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7628,30 +6956,21 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-Cooldown number
---------------
-
+## Cooldown number
 The amount of game ticks until the next harvest action is possible.
 
-StructureFactory
-================
-
+# StructureFactory
 ![](https://docs.screeps.com/api/img/factory.png)
-
 Produces trade commodities from base minerals and other commodities. Learn more about commodities from [this article](https://docs.screeps.com/resources.html#Commodities).
 
 | **Controller level**    |                         |
@@ -7663,9 +6982,7 @@ Produces trade commodities from base minerals and other commodities. Learn more 
 | **Capacity**            | 50,000                  |
 | **Production cooldown** | Depends on the resource |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7674,43 +6991,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7719,18 +7021,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7738,7 +7035,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7747,28 +7043,20 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-Cooldown number
---------------
-
+## Cooldown number
 The amount of game ticks the factory has to wait until the next production is possible.
 
-level number
------------
-
+## level number
 ```
 if(!factory.level) {
     Game.powerCreeps['MyOperator1'].usePower(PWR_OPERATE_FACTORY, factory);
@@ -7777,21 +7065,15 @@ if(!factory.level) {
 
 The factory's level. Can be set by applying the `PWR_OPERATE_FACTORY` power to a newly built factory. Once set, the level cannot be changed.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-storeCapacity number
--------------------
-
+## storeCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-produce(resourceType)
------------------------
-
+## produce(resourceType)
 ```
 factory.produce(RESOURCE_UTRIUM_BAR);
 ```
@@ -7803,7 +7085,6 @@ Produces the specified commodity. All ingredients should be available in the fac
 | `resourceType` | string | One of the `RESOURCE_*` constants. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                     |
@@ -7818,15 +7099,11 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The factory is still cooling down.                              |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Your Room Controller level is insufficient to use the factory.  |
 
-StructureInvaderCore
-====================
-
+# StructureInvaderCore
 ![](https://docs.screeps.com/api/img/invaderCore.png)
 
 This NPC structure is a control center of NPC Strongholds, and also rules all invaders in the sector. It spawns NPC defenders of the stronghold, refill towers, repairs structures. While it's alive, it will spawn invaders in all rooms in the same sector. It also contains some valuable resources inside, which you can loot from its ruin if you destroy the structure.
-
 An Invader Core has two lifetime stages: deploy stage and active stage. When it appears in a random room in the sector, it has `ticksToDeploy` property, public ramparts around it, and doesn't perform any actions. While in this stage it's invulnerable to attacks (has `EFFECT_INVULNERABILITY` enabled). When the `ticksToDeploy` timer is over, it spawns structures around it and starts spawning creeps, becomes vulnerable, and receives `EFFECT_COLLAPSE_TIMER` which will remove the stronghold when this timer is over.
-
 An active Invader Core spawns level-0 Invader Cores in neutral neighbor rooms inside the sector. These lesser Invader Cores are spawned near the room controller and don't perform any activity except reserving/attacking the controller. One Invader Core can spawn up to 42 lesser Cores during its lifetime.
 
 | **Hits**                        | 100,000                                                                                                                                                                    |
@@ -7835,9 +7112,7 @@ An active Invader Core spawns level-0 Invader Cores in neutral neighbor rooms in
 | **Active time**                 | 75,000 ticks with 10% random variation                                                                                                                                     |
 | **Lesser cores spawn interval** | **Stronghold level 1**: 4000 ticks**Stronghold level 2**: 3500 ticks**Stronghold level 3**: 3000 ticks**Stronghold level 4**: 2500 ticks**Stronghold level 5**: 2000 ticks |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7846,43 +7121,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -7891,18 +7151,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -7910,7 +7165,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -7919,38 +7173,26 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-level number
------------
-
+## level number
 The level of the stronghold. The amount and quality of the loot depends on the level.
 
-ticksToDeploy number
--------------------
-
+## ticksToDeploy number
 Shows the timer for a not yet deployed stronghold, undefined otherwise.
 
-spawning[StructureSpawn.Spawning](https://docs.screeps.com/api/#StructureSpawn-Spawning)
-----------------------------------------------------------------------------------------
-
+## spawning[StructureSpawn.Spawning](https://docs.screeps.com/api/#StructureSpawn-Spawning)
 If the core is in process of spawning a new creep, this object will contain a [`StructureSpawn.Spawning`](https://docs.screeps.com/api/#StructureSpawn-Spawning) object, or null otherwise.
 
-StructureKeeperLair
-===================
-
+# StructureKeeperLair
 ![](https://docs.screeps.com/api/img/keeperLair.png)
 
 Non-player structure. Spawns NPC Source Keepers that guards energy sources and minerals in some rooms. This structure cannot be destroyed.
@@ -7958,9 +7200,7 @@ Non-player structure. Spawns NPC Source Keepers that guards energy sources and m
 | **Spawning time** | 300 |
 |-------------------|-----|
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -7969,43 +7209,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8014,18 +7239,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8033,7 +7253,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8042,28 +7261,20 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-ticksToSpawn number
-------------------
-
+## ticksToSpawn number
 Time to spawning of the next Source Keeper.
 
-StructureLab
-============
-
+# StructureLab
 ![](https://docs.screeps.com/api/img/lab.png)
 
 Produces mineral compounds from base minerals, boosts and unboosts creeps. Learn more about minerals from [this article](https://docs.screeps.com/resources.html).
@@ -8082,9 +7293,7 @@ Produces mineral compounds from base minerals, boosts and unboosts creeps. Learn
 | **Distance to input labs** | 2 squares                                                                             |
 | **Boost cost**             | 30 mineral units, 20 energy units per body part                                       |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8093,43 +7302,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8138,18 +7332,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8157,7 +7346,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8166,61 +7354,43 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-Cooldown number
---------------
-
+## Cooldown number
 The amount of game ticks the lab has to wait until the next reaction or unboost operation is possible.
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-mineralamount number
--------------------
-
+## mineralamount number
 This property is deprecated and will be removed soon.
 
 An alias for [`lab.store[lab.mineralType]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-mineralType string
------------------
-
+## mineralType string
 The type of minerals containing in the lab. Labs can contain only one mineral type at the same time.
 
-mineralCapacity number
----------------------
-
+## mineralCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`lab.store.getCapacity(lab.mineralType || yourMineral)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -8229,9 +7399,7 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-boostCreep(creep, \[bodyPartsCount\])
----------------------------------------
-
+## boostCreep(creep, \[bodyPartsCount\])
 Boosts creep body parts using the containing mineral compound. The creep has to be at adjacent square to the lab.
 
 | parameter                  | type                                         | description                                                                                                                                                                                                          |
@@ -8240,7 +7408,6 @@ Boosts creep body parts using the containing mineral compound. The creep has to 
 | `bodyPartsCount`*optional* | number                                       | The number of body parts of the corresponding type to be boosted. Body parts are always counted left-to-right for `TOUGH`, and right-to-left for other types. If undefined, all the eligible body parts are boosted. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                                   |
@@ -8253,9 +7420,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`         | \-9   | The targets are too far away.                                                 |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this structure.                     |
 
-reverseReaction(lab1, lab2)
------------------------------
-
+## reverseReaction(lab1, lab2)
 Breaks mineral compounds back into reagents. The same output labs can be used by many source labs.
 
 | parameter | type                                                       | description            |
@@ -8264,7 +7429,6 @@ Breaks mineral compounds back into reagents. The same output labs can be used by
 | `lab2`    | [StructureLab](https://docs.screeps.com/api/#StructureLab) | The second result lab. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                               |
@@ -8279,9 +7443,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The lab is still cooling down.                            |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this structure. |
 
-runReaction(lab1, lab2)
--------------------------
-
+## runReaction(lab1, lab2)
 Produce mineral compounds using reagents from two other labs. The same input labs can be used by many output labs.
 
 | parameter | type                                                             | description            |
@@ -8290,7 +7452,6 @@ Produce mineral compounds using reagents from two other labs. The same input lab
 | `lab2`    | [StructureLab](https://docs.screeps.com/api/#StructureLab) (lab) | The second source lab. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                               |
@@ -8305,9 +7466,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The lab is still cooling down.                            |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this structure. |
 
-unboostCreep(creep)
----------------------
-
+## unboostCreep(creep)
 Immediately remove boosts from the creep and drop 50% of the mineral compounds used to boost it onto the ground regardless of the creep's remaining time to live. The creep has to be at adjacent square to the lab. Unboosting requires cooldown time equal to the total sum of the reactions needed to produce all the compounds applied to the creep.
 
 | parameter | type                                         | description       |
@@ -8315,7 +7474,6 @@ Immediately remove boosts from the creep and drop 50% of the mineral compounds u
 | `creep`   | [Creep](https://docs.screeps.com/api/#Creep) | The target creep. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                               |
@@ -8328,9 +7486,7 @@ One of the following codes:
 | `ERR_TIRED`          | \-11  | The lab is still cooling down.                            |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Room Controller Level insufficient to use this structure. |
 
-StructureLink
-=============
-
+# StructureLink
 ![](https://docs.screeps.com/api/img/link.png)
 
 Remotely transfers energy to another Link in the same room.
@@ -8348,9 +7504,7 @@ Remotely transfers energy to another Link in the same room.
 | **Cooldown time**    | 1 tick per tile of the linear distance to the target |
 | **Energy loss**      | 3%                                                   |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8359,43 +7513,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8404,18 +7543,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8423,7 +7557,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8432,42 +7565,30 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-Cooldown number
---------------
-
+## Cooldown number
 The amount of game ticks the link has to wait until the next transfer is possible.
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -8476,9 +7597,7 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-transferEnergy(target, \[amount\])
-------------------------------------
-
+## transferEnergy(target, \[amount\])
 ```
 const linkFrom = Game.rooms['W1N1'].lookForAt('structure', 10, 25)[0];
 
@@ -8511,9 +7630,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | The link is still cooling down.                         |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this link.    |
 
-StructureNuker
-==============
-
+# StructureNuker
 ![](https://docs.screeps.com/api/img/nuke.png)
 
 Launches a nuke to another room dealing huge damage to the landing area. Each launch has a cooldown and requires energy and ghodium resources. Launching creates a [Nuke](https://docs.screeps.com/api/#Nuke) object at the target room position which is visible to any player until it is landed. Incoming nuke cannot be moved or cancelled. Nukes cannot be launched from or to novice rooms. Resources placed into a StructureNuker cannot be withdrawn.
@@ -8530,9 +7647,7 @@ Launches a nuke to another room dealing huge damage to the landing area. Each la
 | **Landing time**     | 50,000 ticks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Effect**           | All creeps, construction sites and dropped resources in the room are removed immediately, even inside ramparts. Damage to structures:-   10,000,000 hits at the landing position;-   5,000,000 hits to all structures in 5x5 area.Note that you can stack multiple nukes from different rooms at the same target position to increase damage.Nuke landing does not generate tombstones and ruins, and destroys all existing tombstones and ruins in the roomIf the room is in safe mode, then the safe mode is cancelled immediately, and the safe mode cooldown is reset to 0.The room controller is hit by triggering `upgradeBlocked` period, which means it is unavailable to activate safe mode again within the next 200 ticks. |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8541,43 +7656,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8586,18 +7686,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8605,7 +7700,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8614,56 +7708,40 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-ghodium number
--------------
-
+## ghodium number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_GHODIUM]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-ghodiumCapacity number
----------------------
-
+## ghodiumCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_GHODIUM)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-Cooldown number
---------------
-
+## Cooldown number
 The amount of game ticks until the next launch is possible.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -8672,9 +7750,7 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-launchNuke(pos)
------------------
-
+## launchNuke(pos)
 ```
 nuker.launchNuke(new RoomPosition(20,30, 'W1N1'));
 ```
@@ -8686,7 +7762,6 @@ Launch a nuke to the specified position.
 | `pos`     | [RoomPosition](https://docs.screeps.com/api/#RoomPosition) | The target room position. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                                                                              |
@@ -8700,9 +7775,7 @@ One of the following codes:
 | `ERR_TIRED`                | \-11  | This structure is still cooling down.                                                                                    |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this structure.                                                                |
 
-StructureObserver
-=================
-
+# StructureObserver
 ![](https://docs.screeps.com/api/img/observer.png)
 
 Provides visibility into a distant room from your script.
@@ -8715,9 +7788,7 @@ Provides visibility into a distant room from your script.
 | **Hits**             | 500        |
 | **Range**            | 10 rooms   |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8726,43 +7797,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8771,18 +7827,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8790,7 +7841,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8799,23 +7849,17 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-observeRoom(roomName)
------------------------
-
+## observeRoom(roomName)
 Provide visibility into a distant room from your script. The target room object will be available on the next tick.
 
 | parameter  | type   | description                  |
@@ -8823,7 +7867,6 @@ Provide visibility into a distant room from your script. The target room object 
 | `roomName` | string | The name of the target room. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                               |
@@ -8834,9 +7877,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`   | \-10  | `roomName` argument is not a valid room name value.       |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Room Controller Level insufficient to use this structure. |
 
-StructurePowerBank
-==================
-
+# StructurePowerBank
 ![](https://docs.screeps.com/api/img/powerBank.png)
 
 Non-player structure. Contains power resource which can be obtained by destroying the structure. Hits the attacker creep back on each attack. Learn more about power from [this article](https://docs.screeps.com/power.html).
@@ -8847,9 +7888,7 @@ Non-player structure. Contains power resource which can be obtained by destroyin
 | **Capacity**      | 500 --- 10,000 |
 | **Decay**         | 5,000 ticks    |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8858,43 +7897,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -8903,18 +7927,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -8922,7 +7941,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -8931,19 +7949,13 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-power number
------------
-
+## power number
 The amount of power containing.
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks when this structure will disappear.
 
-StructurePowerSpawn
-===================
-
+# StructurePowerSpawn
 ![](https://docs.screeps.com/api/img/powerSpawn.png)
 
 Processes power into your account, and spawns power creeps with special unique powers (in development). Learn more about power from [this article](https://docs.screeps.com/power.html).
@@ -8958,9 +7970,7 @@ Processes power into your account, and spawns power creeps with special unique p
 | **Processing cost**  | 50 energy units per 1 power unit    |
 | **Processing speed** | 1 power unit per tick               |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -8969,43 +7979,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9014,18 +8009,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9033,7 +8023,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9042,51 +8031,37 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-power number
------------
-
+## power number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_POWER]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-powerCapacity number
--------------------
-
+## powerCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_POWER)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -9095,13 +8070,10 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-processPower()
-----------------
-
+## processPower()
 Register power resource units into your account. Registered power allows to develop power creeps skills.
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                        |
@@ -9111,9 +8083,7 @@ One of the following codes:
 | `ERR_NOT_ENOUGH_RESOURCES` | \-6   | The structure does not have enough energy or power resource units. |
 | `ERR_RCL_NOT_ENOUGH`       | \-14  | Room Controller Level insufficient to use this structure.          |
 
-StructurePortal
-===============
-
+# StructurePortal
 ![](https://docs.screeps.com/api/img/portal.png)
 
 A non-player structure. Instantly teleports your creeps to a distant room acting as a room exit tile. Portals appear randomly in the central room of each sector.
@@ -9122,9 +8092,7 @@ A non-player structure. Instantly teleports your creeps to a distant room acting
 |-----------------|--------------|
 | **Decay time**  | 30,000 ticks |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -9133,43 +8101,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9178,18 +8131,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9197,7 +8145,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9206,21 +8153,14 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-destination[RoomPosition](https://docs.screeps.com/api/#RoomPosition) | object
-------------------------------------------------------------------------------
-
+## destination[RoomPosition](https://docs.screeps.com/api/#RoomPosition) | object
 If this is an **inter-room** portal, then this property contains a `RoomPosition` object leading to the point in the destination room.
-
 If this is an **inter-shard** portal, then this property contains an object with `shard` and `room` string properties. Exact coordinates are undetermined, the creep will appear at any free spot in the destination room.
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks when the portal disappears, or undefined when the portal is stable.
 
-StructureRampart
-================
-
+# StructureRampart
 ![](https://docs.screeps.com/api/img/rampart.png)
 
 Blocks movement of hostile creeps, and defends your creeps and structures on the same tile. Can be used as a controllable gate.
@@ -9239,9 +8179,7 @@ Blocks movement of hostile creeps, and defends your creeps and structures on the
 | **Hits when constructed** | 1                              |
 | **Decay**                 | Loses 300 hits every 100 ticks |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -9250,44 +8188,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure)
-hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9296,18 +8218,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9315,7 +8232,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9324,33 +8240,23 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-isPublic boolean
----------------
-
+## isPublic boolean
 If false (default), only your creeps can step on the same square. If true, any hostile creeps can pass through.
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks when this rampart will lose some hit points.
 
-setPublic(isPublic)
----------------------
-
+## setPublic(isPublic)
 Make this rampart public to allow other players' creeps to pass through.
 
 | parameter  | type    | description                                          |
@@ -9358,7 +8264,6 @@ Make this rampart public to allow other players' creeps to pass through.
 | `isPublic` | boolean | Whether this rampart should be public or non-public. |
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9366,9 +8271,7 @@ One of the following codes:
 | `OK`            | 0     | The operation has been scheduled successfully. |
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 
-StructureRoad
-=============
-
+# StructureRoad
 ![](https://docs.screeps.com/api/img/road_plain.png)
 
 Decreases movement cost to 1. Using roads allows creating creeps with less `MOVE` body parts. You can also build roads on top of natural terrain walls which are otherwise impassable.
@@ -9379,9 +8282,7 @@ Decreases movement cost to 1. Using roads allows creating creeps with less `MOVE
 | **Hits**             | -   5,000 on plain land-   25,000 on swamp-   750,000 on walls                                                                                                                                                                      |
 | **Decay**            | -   Loses 100 hits every 1,000 ticks on plain land-   Loses 500 hits every 1,000 ticks on swamp-   Loses 15,000 hits every 1,000 ticks on wallsNote: every creep step decreases the decay timer for 1 tick per each creep body part |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -9390,43 +8291,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9435,18 +8321,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9454,7 +8335,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9463,14 +8343,10 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks when this road will lose some hit points.
 
-StructureSpawn
-==============
-
+## StructureSpawn
 ![](https://docs.screeps.com/api/img/spawn.png)
 
 Spawn is your colony center. This structure can create, renew, and recycle creeps. All your spawns are accessible through [`Game.spawns`](https://docs.screeps.com/api/#Game.spawns) hash list. Spawns auto-regenerate a little amount of energy each tick, so that you can easily recover even if all your creeps died.
@@ -9486,9 +8362,7 @@ Spawn is your colony center. This structure can create, renew, and recycle creep
 | **Spawn time**               | 3 ticks per each body part                                                                                |
 | **Energy auto-regeneration** | 1 energy unit per tick while energy available in the room (in all spawns and extensions) is less than 300 |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -9497,43 +8371,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9542,18 +8401,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9561,7 +8415,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9570,56 +8423,40 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-memory any
----------
-
+## memory any
 ```
 spawn.memory.queue = [];
 ```
 
 A shorthand to `Memory.spawns[spawn.name]`. You can use it for quick access the spawn's specific memory data object. [Learn more about memory](https://docs.screeps.com/global-objects.html#Memory-object)
 
-name string
-----------
-
+## name string
 Spawn's name. You choose the name upon creating a new spawn, and it cannot be changed later. This name is a hash key to access the spawn via the [Game.spawns](https://docs.screeps.com/api/#Game.spawns) object.
 
-spawning[StructureSpawn.Spawning](https://docs.screeps.com/api/#StructureSpawn-Spawning)
-----------------------------------------------------------------------------------------
-
+## spawning[StructureSpawn.Spawning](https://docs.screeps.com/api/#StructureSpawn-Spawning)
 If the spawn is in process of spawning a new creep, this object will contain a [`StructureSpawn.Spawning`](https://docs.screeps.com/api/#StructureSpawn-Spawning) object, or null otherwise.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -9628,9 +8465,7 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-canCreateCreep(body, \[name\])
---------------------------------
-
+## canCreateCreep(body, \[name\])
 This method is deprecated and will be removed soon. Please use [`StructureSpawn.spawnCreep`](https://docs.screeps.com/api/#StructureSpawn.spawnCreep) with `dryRun` flag instead.
 
 ```
@@ -9647,7 +8482,6 @@ Check if a creep can be created.
 | `name`*optional* | string        | The name of a new creep. The name length limit is 100 characters. It should be unique creep name, i.e. the `Game.creeps` object should not contain another creep with the same name (hash key). If not defined, a random name will be generated. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                                                                   |
@@ -9660,9 +8494,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`      | \-10  | Body is not properly described.                                                               |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Your Room Controller level is insufficient to use this spawn.                                 |
 
-createCreep(body, \[name\], \[memory\])
------------------------------------------
-
+## createCreep(body, \[name\], \[memory\])
 This method is deprecated and will be removed soon. Please use [`StructureSpawn.spawnCreep`](https://docs.screeps.com/api/#StructureSpawn.spawnCreep) instead.
 
 ```
@@ -9677,8 +8509,7 @@ const result = Game.spawns['Spawn1'].createCreep([WORK, CARRY, MOVE]);
 
 if(_.isString(result)) {
     console.log('The name is: '+result);
-}
-else {
+} else {
     console.log('Spawn error: '+result);
 }
 ```
@@ -9692,7 +8523,6 @@ Start the creep spawning process. The required energy amount can be withdrawn fr
 | `memory`*optional* | any           | The memory of a new creep. If provided, it will be immediately stored into `Memory.creeps[name]`.                                                                                                                                                |
 
 ### Return value
-
 The name of a new creep or one of these error codes:
 
 | constant                | value | description                                                                                   |
@@ -9704,9 +8534,7 @@ The name of a new creep or one of these error codes:
 | `ERR_INVALID_ARGS`      | \-10  | Body is not properly described.                                                               |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Your Room Controller level is insufficient to use this spawn.                                 |
 
-spawnCreep(body, name, \[opts\])
-----------------------------------
-
+## spawnCreep(body, name, \[opts\])
 ```
 Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], 'Worker1');
 ```
@@ -9737,7 +8565,6 @@ Start the creep spawning process. The required energy amount can be withdrawn fr
 | `opts`*optional* | object        | An object with additional options for the spawning process.-   memory     any    Memory of the new creep. If provided, it will be immediately stored into `Memory.creeps[name]`.    -   energyStructures     array    Array of spawns/extensions from which to draw energy for the spawning process. Structures will be used according to the array order.    -   dryRun     boolean    If `dryRun` is true, the operation will only check if it is possible to create a creep.    -   directions     array    Set desired directions where the creep should move when spawned. An array with the direction constants:        -   `TOP`    -   `TOP_RIGHT`    -   `RIGHT`    -   `BOTTOM_RIGHT`    -   `BOTTOM`    -   `BOTTOM_LEFT`    -   `LEFT`    -   `TOP_LEFT` |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                                                                   |
@@ -9750,9 +8577,7 @@ One of the following codes:
 | `ERR_INVALID_ARGS`      | \-10  | Body is not properly described or name was not provided.                                      |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Your Room Controller level is insufficient to use this spawn.                                 |
 
-recycleCreep(target)
-----------------------
-
+## recycleCreep(target)
 Kill the creep and drop up to 100% of resources spent on its spawning and boosting depending on remaining life-time. The target should be at adjacent square. Energy return is limited to 125 units per body part.
 
 | parameter | type                                         | description              |
@@ -9760,7 +8585,6 @@ Kill the creep and drop up to 100% of resources spent on its spawning and boosti
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) | The target creep object. |
 
 ### Return value
-
 One of the following codes:
 
 | constant             | value | description                                                   |
@@ -9771,9 +8595,7 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`   | \-9   | The target creep is too far away.                             |
 | `ERR_RCL_NOT_ENOUGH` | \-14  | Your Room Controller level is insufficient to use this spawn. |
 
-renewCreep(target)
---------------------
-
+## renewCreep(target)
 Increase the remaining time to live of the target creep. The target should be at adjacent square. The target should not have CLAIM body parts. The spawn should not be busy with the spawning process. Each execution increases the creep's timer by amount of ticks according to this formula:
 
 ```
@@ -9793,7 +8615,6 @@ Renewing a creep removes all of its boosts.
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) | The target creep object. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                                                   |
@@ -9807,39 +8628,25 @@ One of the following codes:
 | `ERR_NOT_IN_RANGE`      | \-9   | The target creep is too far away.                                             |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Your Room Controller level is insufficient to use this spawn.                 |
 
-StructureSpawn.Spawning
-=======================
-
+# StructureSpawn.Spawning
 Details of the creep being spawned currently that can be addressed by the [`StructureSpawn.spawning`](https://docs.screeps.com/api/#StructureSpawn.spawning) property.
 
-directions array
----------------
-
+## directions array
 An array with the spawn directions, see [`StructureSpawn.Spawning.setDirections`](https://docs.screeps.com/api/#StructureSpawn.Spawning.setDirections).
 
-name string
-----------
-
+## name string
 The name of a new creep.
 
-needTime number
---------------
-
+## needTime number
 Time needed in total to complete the spawning.
 
-remainingTime number
--------------------
-
+## remainingTime number
 Remaining time to go.
 
-spawn[StructureSpawn](https://docs.screeps.com/api/#StructureSpawn)
--------------------------------------------------------------------
-
+## spawn[StructureSpawn](https://docs.screeps.com/api/#StructureSpawn)
 A link to the spawn.
 
-cancel()
-----------
-
+## cancel()
 ```
 Game.spawns['Spawn1'].spawning.cancel();
 ```
@@ -9847,7 +8654,6 @@ Game.spawns['Spawn1'].spawning.cancel();
 Cancel spawning immediately. Energy spent on spawning is not returned.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9855,9 +8661,7 @@ One of the following codes:
 | `OK`            | 0     | The operation has been scheduled successfully. |
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this spawn.           |
 
-setDirections(directions)
----------------------------
-
+## setDirections(directions)
 ```
 Game.spawns['Spawn1'].spawning.setDirections([RIGHT, TOP_RIGHT]);
 ```
@@ -9869,7 +8673,6 @@ Set desired directions where the creep should move when spawned.
 | `directions` | array<number> | An array with the direction constants:-   `TOP`-   `TOP_RIGHT`-   `RIGHT`-   `BOTTOM_RIGHT`-   `BOTTOM`-   `BOTTOM_LEFT`-   `LEFT`-   `TOP_LEFT` |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9878,9 +8681,7 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this spawn.           |
 | `ERR_INVALID_ARGS` | \-10  | The directions is array is invalid.            |
 
-StructureStorage
-================
-
+# StructureStorage
 ![](https://docs.screeps.com/api/img/storage.png)
 
 A structure that can store huge amount of resource units. Only one structure per room is allowed that can be addressed by [`Room.storage`](https://docs.screeps.com/api/#Room.storage) property.
@@ -9893,9 +8694,7 @@ A structure that can store huge amount of resource units. Only one structure per
 | **Hits**             | 10,000    |
 | **Capacity**         | 1,000,000 |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -9904,43 +8703,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -9949,18 +8733,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -9968,7 +8747,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -9977,39 +8755,28 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-storeCapacity number
--------------------
-
+## storeCapacity number
 This property is deprecated and will be removed soon.
 
 An alias for [`.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-StructureTerminal
-=================
-
+# StructureTerminal
 ![](https://docs.screeps.com/api/img/terminal.png)
 
 Sends any resources to a Terminal in another room. The destination Terminal can belong to any player. Each transaction requires additional energy (regardless of the transfer resource type) that can be calculated using [`Game.market.calcTransactionCost`](https://docs.screeps.com/api/#Game.market.calcTransactionCost) method. For example, sending 1000 mineral units from W0N0 to W10N5 will consume 742 energy units. You can track your incoming and outgoing transactions using the [`Game.market`](https://docs.screeps.com/api/#Game.market) object. Only one Terminal per room is allowed that can be addressed by [`Room.terminal`](https://docs.screeps.com/api/#Room.terminal) property.
-
 Terminals are used in the [Market system](https://docs.screeps.com/market.html).
 
 | **Controller level** |            |
@@ -10021,9 +8788,7 @@ Terminals are used in the [Market system](https://docs.screeps.com/market.html).
 | **Capacity**         | 300,000    |
 | **Cooldown on send** | 10 ticks   |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -10032,43 +8797,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -10077,18 +8827,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -10096,7 +8841,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -10105,40 +8849,27 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-Cooldown number
---------------
-
+## Cooldown number
 The remaining amount of ticks while this terminal cannot be used to make [`StructureTerminal.send`](https://docs.screeps.com/api/#StructureTerminal.send) or [`Game.market.deal`](https://docs.screeps.com/api/#Game.market.deal) calls.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-storeCapacity number
--------------------
-
+## storeCapacity number
 This property is deprecated and will be removed soon.
-
 An alias for [`.store.getCapacity()`](https://docs.screeps.com/api/#Store.getCapacity).
 
-send(resourceType, amount, destination, \[description\])
-----------------------------------------------------------
-
+## send(resourceType, amount, destination, \[description\])
 ```
 Game.rooms['W1N1'].terminal.send(RESOURCE_UTRIUM, 100, 'W2N3',
     'trade contract #1');
@@ -10154,7 +8885,6 @@ Sends resource to a Terminal in another room with the specified name.
 | `description`*optional* | string | The description of the transaction. It is visible to the recipient. The maximum length is 100 characters. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                   | value | description                                                   |
@@ -10165,11 +8895,8 @@ One of the following codes:
 | `ERR_INVALID_ARGS`         | \-10  | The arguments provided are incorrect.                         |
 | `ERR_TIRED`                | \-11  | The terminal is still cooling down.                           |
 
-StructureTower
-==============
-
+# StructureTower
 ![](https://docs.screeps.com/api/img/tower.png)
-
 Remotely attacks or heals creeps, or repairs structures. Can be targeted to any object in the room. However, its effectiveness linearly depends on the distance. Each action consumes energy.
 
 | **Controller level**     |                                               |
@@ -10187,9 +8914,7 @@ Remotely attacks or heals creeps, or repairs structures. Can be targeted to any 
 | **Heal effectiveness**   | 400 hits at range ≤5 to 100 hits at range ≥20 |
 | **Repair effectiveness** | 800 hits at range ≤5 to 200 hits at range ≥20 |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -10198,43 +8923,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -10243,18 +8953,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -10262,7 +8967,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -10271,37 +8975,25 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
----------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) my boolean
 Whether this is your own structure.
 
-Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
------------------------------------------------------------------------------------------
-
+## Inherited from [OwnedStructure](https://docs.screeps.com/api/#OwnedStructure) owner object
 An object with the structure's owner info containing the following properties:
 
 | parameter  | type   | description                 |
 |------------|--------|-----------------------------|
 | `username` | string | The name of the owner user. |
 
-energy number
-------------
-
+## energy number
 This property is deprecated and will be removed soon.
-
 An alias for [`.store[RESOURCE_ENERGY]`](https://docs.screeps.com/api/#StructureExtension.store).
 
-energyCapacity number
---------------------
-
+## energyCapacity number
 This property is deprecated and will be removed soon.
-
 An alias for [`.store.getCapacity(RESOURCE_ENERGY)`](https://docs.screeps.com/api/#Store.getCapacity).
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 ```
 if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
     creep.transfer(structure, RESOURCE_ENERGY);
@@ -10310,9 +9002,7 @@ if(structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
 
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-attack(target)
-----------------
-
+## attack(target)
 Remotely attack any creep, power creep or structure in the room.
 
 | parameter | type                                                                                                                                                           | description       |
@@ -10320,7 +9010,6 @@ Remotely attack any creep, power creep or structure in the room.
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) \| [PowerCreep](https://docs.screeps.com/api/#PowerCreep) \| [Structure](https://docs.screeps.com/api/#Structure) | The target creep. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                               |
@@ -10331,9 +9020,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET`    | \-7   | The target is not a valid attackable object.              |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Room Controller Level insufficient to use this structure. |
 
-heal(target)
---------------
-
+## heal(target)
 Remotely heal any creep or power creep in the room.
 
 | parameter | type                                                                                                   | description       |
@@ -10341,7 +9028,6 @@ Remotely heal any creep or power creep in the room.
 | `target`  | [Creep](https://docs.screeps.com/api/#Creep) \| [PowerCreep](https://docs.screeps.com/api/#PowerCreep) | The target creep. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                               |
@@ -10352,9 +9038,7 @@ One of the following codes:
 | `ERR_INVALID_TARGET`    | \-7   | The target is not a valid creep object.                   |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Room Controller Level insufficient to use this structure. |
 
-repair(target)
-----------------
-
+## repair(target)
 Remotely repair any structure in the room.
 
 | parameter | type                                                 | description           |
@@ -10362,7 +9046,6 @@ Remotely repair any structure in the room.
 | `target`  | [Structure](https://docs.screeps.com/api/#Structure) | The target structure. |
 
 ### Return value
-
 One of the following codes:
 
 | constant                | value | description                                               |
@@ -10373,11 +9056,8 @@ One of the following codes:
 | `ERR_INVALID_TARGET`    | \-7   | The target is not a valid repairable object.              |
 | `ERR_RCL_NOT_ENOUGH`    | \-14  | Room Controller Level insufficient to use this structure. |
 
-StructureWall
-=============
-
+# StructureWall
 ![](https://docs.screeps.com/api/img/wall.png)
-
 Blocks movement of all creeps. Players can build destructible walls in controlled rooms. Some rooms also contain indestructible walls separating novice and respawn areas from the rest of the world or dividing novice / respawn areas into smaller sections. Indestructible walls have no `hits` property.
 
 | **Controller level**      | 2           |
@@ -10386,9 +9066,7 @@ Blocks movement of all creeps. Players can build destructible walls in controlle
 | **Hits when constructed** | 1           |
 | **Max hits**              | 300,000,000 |
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -10397,43 +9075,28 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
-------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hits number
 The current amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
----------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) hitsMax number
 The total amount of hit points of the structure.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
-----------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
----------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) structureType string
 One of the `STRUCTURE_*` constants.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
--------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) destroy()
 Destroy this structure immediately.
 
 ### Return value
-
 One of the following codes:
 
 | constant        | value | description                                    |
@@ -10442,18 +9105,13 @@ One of the following codes:
 | `ERR_NOT_OWNER` | \-1   | You are not the owner of this structure.       |
 | `ERR_BUSY`      | \-4   | Hostile creeps are in the room.                |
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
---------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) isActive()
 Check whether this structure can be used. If room controller level is insufficient, then this method will return false, and the structure will be highlighted with red in the game.
 
 ### Return value
-
 A boolean value.
 
-Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
--------------------------------------------------------------------------------------------------
-
+## Inherited from [Structure](https://docs.screeps.com/api/#Structure) notifyWhenAttacked(enabled)
 Toggle auto notification when the structure is under attack. The notification will be sent to your account email. Turned on by default.
 
 | parameter | type    | description                                |
@@ -10461,7 +9119,6 @@ Toggle auto notification when the structure is under attack. The notification wi
 | `enabled` | boolean | Whether to enable notification or disable. |
 
 ### Return value
-
 One of the following codes:
 
 | constant           | value | description                                    |
@@ -10470,19 +9127,14 @@ One of the following codes:
 | `ERR_NOT_OWNER`    | \-1   | You are not the owner of this structure.       |
 | `ERR_INVALID_ARGS` | \-10  | `enable` argument is not a boolean value.      |
 
-Tombstone
-=========
-
+# Tombstone
 ![](https://docs.screeps.com/api/img/tombstone.gif)
-
 A remnant of dead creeps. This is a walkable object.
 
 | **Decay** | 5 ticks per body part of the deceased creep |
 |-----------|---------------------------------------------|
 
-effects array
-------------
-
+## effects array
 Applied effects, an array of objects with the following properties:
 
 | parameter         | type   | description                                                                    |
@@ -10491,19 +9143,13 @@ Applied effects, an array of objects with the following properties:
 | `level`*optional* | number | Power level of the applied effect. Absent if the effect is not a Power effect. |
 | `ticksRemaining`  | number | How many ticks will the effect last.                                           |
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
------------------------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) pos [RoomPosition](https://docs.screeps.com/api/#RoomPosition)
 An object representing the position of this object in the room.
 
-Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
---------------------------------------------------------------------------------------------------------------------
-
+## Inherited from [RoomObject](https://docs.screeps.com/api/#RoomObject) room [Room](https://docs.screeps.com/api/#Room)
 The link to the Room object. May be undefined in case if an object is a flag or a construction site and is placed in a room that is not visible to you.
 
-creep[Creep](https://docs.screeps.com/api/#Creep) | [PowerCreep](https://docs.screeps.com/api/#PowerCreep)
-----------------------------------------------------------------------------------------------------------
-
+## creep[Creep](https://docs.screeps.com/api/#Creep) | [PowerCreep](https://docs.screeps.com/api/#PowerCreep)
 ```
 room.find(FIND_TOMBSTONES).forEach(tombstone => {
     if(tombstone.creep.my) {
@@ -10523,22 +9169,14 @@ room.find(FIND_TOMBSTONES).forEach(tombstone => {
 
 An object containing the deceased creep or power creep.
 
-deathTime number
----------------
-
+## deathTime number
 Time of death.
 
-id string
---------
-
+## id string
 A unique object identifier. You can use [`Game.getObjectById`](https://docs.screeps.com/api/#Game.getObjectById) method to retrieve an object instance by its `id`.
 
-store [Store](https://docs.screeps.com/api/#Store)
--------------------------------------------------
-
+## store [Store](https://docs.screeps.com/api/#Store)
 A [`Store`](https://docs.screeps.com/api/#Store) object that contains cargo of this structure.
 
-ticksToDecay number
-------------------
-
+## ticksToDecay number
 The amount of game ticks before this tombstone decays.
