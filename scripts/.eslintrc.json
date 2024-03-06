@@ -35,6 +35,7 @@
     "TOUGH": "readonly",
     "CLAIM": "readonly",
     "RESOURCE_ENERGY": "readonly",
+    "ERR_INVALID_TARGET": "readonly",
     "FIND_CONSTRUCTION_SITES": "readonly",
     "FIND_DROPPED_RESOURCES": "readonly",
     "FIND_HOSTILE_CREEPS": "readonly",
@@ -59,7 +60,6 @@
   },
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
-    "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
     "semi": ["error", "always"],
     "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],

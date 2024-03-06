@@ -26,7 +26,7 @@ function minCreeps(role, minCount, bodyConfig, spawnName, roomName) {
 
 const creep = {
   run: function () {
-    roomName = 'E51N15';
+    const roomName = 'E51N15';
     minCreeps('minim', 1, [WORK, CARRY, MOVE], 'HomeSpawn', roomName);
     minCreeps('nurse', 2, [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, MOVE], 'HomeSpawn', roomName);
     minCreeps('picker', 2, rolePicker.bodyTemplate, 'HomeSpawn', roomName);
